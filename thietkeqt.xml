@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AdminSystem>
+    <Components>
+        <Component id="admin_auth">
+            <Name>Admin Authentication</Name>
+            <Description>Quản lý đăng nhập và phân quyền cho quản trị viên</Description>
+            <Features>
+                <Feature>Đăng nhập quản trị</Feature>
+                <Feature>Quên mật khẩu</Feature>
+                <Feature>Đổi mật khẩu</Feature>
+                <Feature>Quản lý phiên đăng nhập</Feature>
+                <Feature>Xác thực hai lớp</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Database</Dependency>
+                <Dependency>Email Service</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="user_management">
+            <Name>User Management</Name>
+            <Description>Quản lý thông tin người dùng</Description>
+            <Features>
+                <Feature>Danh sách người dùng</Feature>
+                <Feature>Thêm người dùng mới</Feature>
+                <Feature>Chỉnh sửa thông tin người dùng</Feature>
+                <Feature>Khóa/mở khóa tài khoản</Feature>
+                <Feature>Xóa tài khoản</Feature>
+                <Feature>Phân quyền người dùng</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Admin Authentication</Dependency>
+                <Dependency>Database</Dependency>
+                <Dependency>Email Service</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="product_management">
+            <Name>Product Management</Name>
+            <Description>Quản lý sản phẩm trong hệ thống</Description>
+            <Features>
+                <Feature>Danh sách sản phẩm</Feature>
+                <Feature>Thêm sản phẩm mới</Feature>
+                <Feature>Chỉnh sửa thông tin sản phẩm</Feature>
+                <Feature>Xóa sản phẩm</Feature>
+                <Feature>Quản lý kho hàng</Feature>
+                <Feature>Quản lý giá sản phẩm</Feature>
+                <Feature>Quản lý khuyến mãi</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Admin Authentication</Dependency>
+                <Dependency>Database</Dependency>
+                <Dependency>File Storage</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="category_management">
+            <Name>Category Management</Name>
+            <Description>Quản lý danh mục sản phẩm</Description>
+            <Features>
+                <Feature>Danh sách danh mục</Feature>
+                <Feature>Thêm danh mục mới</Feature>
+                <Feature>Chỉnh sửa danh mục</Feature>
+                <Feature>Xóa danh mục</Feature>
+                <Feature>Sắp xếp danh mục</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Admin Authentication</Dependency>
+                <Dependency>Database</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="order_management">
+            <Name>Order Management</Name>
+            <Description>Quản lý đơn hàng trong hệ thống</Description>
+            <Features>
+                <Feature>Danh sách đơn hàng</Feature>
+                <Feature>Chi tiết đơn hàng</Feature>
+                <Feature>Cập nhật trạng thái đơn hàng</Feature>
+                <Feature>Hủy đơn hàng</Feature>
+                <Feature>In hóa đơn</Feature>
+                <Feature>Xử lý hoàn tiền</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Admin Authentication</Dependency>
+                <Dependency>Database</Dependency>
+                <Dependency>Notification Service</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="inventory_management">
+            <Name>Inventory Management</Name>
+            <Description>Quản lý kho hàng và tồn kho</Description>
+            <Features>
+                <Feature>Theo dõi tồn kho</Feature>
+                <Feature>Nhập hàng</Feature>
+                <Feature>Xuất hàng</Feature>
+                <Feature>Kiểm kê kho</Feature>
+                <Feature>Báo cáo tồn kho</Feature>
+                <Feature>Cảnh báo hết hàng</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Admin Authentication</Dependency>
+                <Dependency>Product Management</Dependency>
+                <Dependency>Database</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="promotion_management">
+            <Name>Promotion Management</Name>
+            <Description>Quản lý khuyến mãi và mã giảm giá</Description>
+            <Features>
+                <Feature>Danh sách khuyến mãi</Feature>
+                <Feature>Tạo khuyến mãi mới</Feature>
+                <Feature>Chỉnh sửa khuyến mãi</Feature>
+                <Feature>Xóa khuyến mãi</Feature>
+                <Feature>Quản lý mã giảm giá</Feature>
+                <Feature>Thiết lập điều kiện áp dụng</Feature>
+                <Feature>Lên lịch khuyến mãi</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Admin Authentication</Dependency>
+                <Dependency>Product Management</Dependency>
+                <Dependency>Database</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="report_analytics">
+            <Name>Reports and Analytics</Name>
+            <Description>Báo cáo và phân tích dữ liệu</Description>
+            <Features>
+                <Feature>Báo cáo doanh thu</Feature>
+                <Feature>Báo cáo đơn hàng</Feature>
+                <Feature>Báo cáo sản phẩm bán chạy</Feature>
+                <Feature>Phân tích hành vi người dùng</Feature>
+                <Feature>Biểu đồ thống kê</Feature>
+                <Feature>Xuất báo cáo</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Admin Authentication</Dependency>
+                <Dependency>Order Management</Dependency>
+                <Dependency>Product Management</Dependency>
+                <Dependency>Database</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="content_management">
+            <Name>Content Management</Name>
+            <Description>Quản lý nội dung trang web</Description>
+            <Features>
+                <Feature>Quản lý banner</Feature>
+                <Feature>Quản lý trang tĩnh</Feature>
+                <Feature>Quản lý bài viết/blog</Feature>
+                <Feature>Quản lý FAQ</Feature>
+                <Feature>Quản lý thông báo</Feature>
+                <Feature>Quản lý media</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Admin Authentication</Dependency>
+                <Dependency>Database</Dependency>
+                <Dependency>File Storage</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="review_management">
+            <Name>Review Management</Name>
+            <Description>Quản lý đánh giá và bình luận</Description>
+            <Features>
+                <Feature>Danh sách đánh giá</Feature>
+                <Feature>Phê duyệt đánh giá</Feature>
+                <Feature>Xóa đánh giá</Feature>
+                <Feature>Phản hồi đánh giá</Feature>
+                <Feature>Báo cáo đánh giá vi phạm</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Admin Authentication</Dependency>
+                <Dependency>Product Management</Dependency>
+                <Dependency>Database</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="system_settings">
+            <Name>System Settings</Name>
+            <Description>Cấu hình hệ thống</Description>
+            <Features>
+                <Feature>Cài đặt chung</Feature>
+                <Feature>Cài đặt thanh toán</Feature>
+                <Feature>Cài đặt vận chuyển</Feature>
+                <Feature>Cài đặt email</Feature>
+                <Feature>Cài đặt bảo mật</Feature>
+                <Feature>Quản lý tích hợp bên thứ ba</Feature>
+                <Feature>Sao lưu và phục hồi</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Admin Authentication</Dependency>
+                <Dependency>Database</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="admin_notification">
+            <Name>Admin Notification</Name>
+            <Description>Hệ thống thông báo cho quản trị viên</Description>
+            <Features>
+                <Feature>Thông báo đơn hàng mới</Feature>
+                <Feature>Thông báo hết hàng</Feature>
+                <Feature>Thông báo đánh giá mới</Feature>
+                <Feature>Thông báo lỗi hệ thống</Feature>
+                <Feature>Thông báo bảo mật</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Admin Authentication</Dependency>
+                <Dependency>Database</Dependency>
+                <Dependency>Email Service</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="staff_management">
+            <Name>Staff Management</Name>
+            <Description>Quản lý nhân viên và phân quyền</Description>
+            <Features>
+                <Feature>Danh sách nhân viên</Feature>
+                <Feature>Thêm nhân viên mới</Feature>
+                <Feature>Chỉnh sửa thông tin nhân viên</Feature>
+                <Feature>Phân quyền nhân viên</Feature>
+                <Feature>Khóa/mở khóa tài khoản nhân viên</Feature>
+                <Feature>Nhật ký hoạt động</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Admin Authentication</Dependency>
+                <Dependency>Database</Dependency>
+            </Dependencies>
+        </Component>
+    </Components>
+    
+    <DataFlow>
+        <Flow from="admin_auth" to="user_management">Thông tin xác thực và phân quyền</Flow>
+        <Flow from="admin_auth" to="product_management">Thông tin xác thực và phân quyền</Flow>
+        <Flow from="admin_auth" to="order_management">Thông tin xác thực và phân quyền</Flow>
+        <Flow from="product_management" to="inventory_management">Thông tin sản phẩm để quản lý kho</Flow>
+        <Flow from="product_management" to="promotion_management">Thông tin sản phẩm để thiết lập khuyến mãi</Flow>
+        <Flow from="order_management" to="inventory_management">Cập nhật tồn kho khi có đơn hàng</Flow>
+        <Flow from="order_management" to="report_analytics">Dữ liệu đơn hàng để phân tích</Flow>
+        <Flow from="product_management" to="report_analytics">Dữ liệu sản phẩm để phân tích</Flow>
+        <Flow from="user_management" to="report_analytics">Dữ liệu người dùng để phân tích</Flow>
+        <Flow from="inventory_management" to="admin_notification">Thông báo tồn kho</Flow>
+        <Flow from="order_management" to="admin_notification">Thông báo đơn hàng mới</Flow>
+        <Flow from="review_management" to="admin_notification">Thông báo đánh giá mới</Flow>
+        <Flow from="category_management" to="product_management">Thông tin danh mục cho sản phẩm</Flow>
+    </DataFlow>
+    
+    <AdminInterface>
+        <Page id="admin_dashboard">
+            <Name>Bảng điều khiển</Name>
+            <Components>
+                <ComponentRef>report_analytics</ComponentRef>
+                <ComponentRef>admin_notification</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="admin_login">
+            <Name>Đăng nhập quản trị</Name>
+            <Components>
+                <ComponentRef>admin_auth</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="user_list">
+            <Name>Quản lý người dùng</Name>
+            <Components>
+                <ComponentRef>user_management</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="product_list">
+            <Name>Quản lý sản phẩm</Name>
+            <Components>
+                <ComponentRef>product_management</ComponentRef>
+                <ComponentRef>category_management</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="product_edit">
+            <Name>Chỉnh sửa sản phẩm</Name>
+            <Components>
+                <ComponentRef>product_management</ComponentRef>
+                <ComponentRef>category_management</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="category_list">
+            <Name>Quản lý danh mục</Name>
+            <Components>
+                <ComponentRef>category_management</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="order_list">
+            <Name>Quản lý đơn hàng</Name>
+            <Components>
+                <ComponentRef>order_management</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="order_detail">
+            <Name>Chi tiết đơn hàng</Name>
+            <Components>
+                <ComponentRef>order_management</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="inventory">
+            <Name>Quản lý kho hàng</Name>
+            <Components>
+                <ComponentRef>inventory_management</ComponentRef>
+                <ComponentRef>product_management</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="promotion_list">
+            <Name>Quản lý khuyến mãi</Name>
+            <Components>
+                <ComponentRef>promotion_management</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="reports">
+            <Name>Báo cáo thống kê</Name>
+            <Components>
+                <ComponentRef>report_analytics</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="content">
+            <Name>Quản lý nội dung</Name>
+            <Components>
+                <ComponentRef>content_management</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="reviews">
+            <Name>Quản lý đánh giá</Name>
+            <Components>
+                <ComponentRef>review_management</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="settings">
+            <Name>Cài đặt hệ thống</Name>
+            <Components>
+                <ComponentRef>system_settings</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="staff">
+            <Name>Quản lý nhân viên</Name>
+            <Components>
+                <ComponentRef>staff_management</ComponentRef>
+            </Components>
+        </Page>
+    </AdminInterface>
+    
+    <AccessControl>
+        <Role id="super_admin">
+            <Name>Super Admin</Name>
+            <Description>Quyền truy cập đầy đủ vào tất cả các chức năng</Description>
+            <Permissions>
+                <Permission>Truy cập tất cả các tính năng</Permission>
+                <Permission>Quản lý nhân viên và phân quyền</Permission>
+                <Permission>Cài đặt hệ thống</Permission>
+                <Permission>Xem báo cáo tổng hợp</Permission>
+            </Permissions>
+        </Role>
+        
+        <Role id="admin">
+            <Name>Admin</Name>
+            <Description>Quyền quản trị hệ thống nhưng không thể quản lý nhân viên cấp cao</Description>
+            <Permissions>
+                <Permission>Quản lý sản phẩm</Permission>
+                <Permission>Quản lý đơn hàng</Permission>
+                <Permission>Quản lý người dùng</Permission>
+                <Permission>Quản lý nội dung</Permission>
+                <Permission>Xem báo cáo</Permission>
+            </Permissions>
+        </Role>
+        
+        <Role id="product_manager">
+            <Name>Product Manager</Name>
+            <Description>Chỉ quản lý sản phẩm và danh mục</Description>
+            <Permissions>
+                <Permission>Quản lý sản phẩm</Permission>
+                <Permission>Quản lý danh mục</Permission>
+                <Permission>Quản lý kho hàng</Permission>
+            </Permissions>
+        </Role>
+        
+        <Role id="order_manager">
+            <Name>Order Manager</Name>
+            <Description>Chỉ quản lý đơn hàng</Description>
+            <Permissions>
+                <Permission>Xem đơn hàng</Permission>
+                <Permission>Cập nhật trạng thái đơn hàng</Permission>
+                <Permission>Xử lý hoàn tiền</Permission>
+            </Permissions>
+        </Role>
+        
+        <Role id="content_manager">
+            <Name>Content Manager</Name>
+            <Description>Chỉ quản lý nội dung</Description>
+            <Permissions>
+                <Permission>Quản lý nội dung</Permission>
+                <Permission>Quản lý đánh giá</Permission>
+            </Permissions>
+        </Role>
+    </AccessControl>
+</AdminSystem>

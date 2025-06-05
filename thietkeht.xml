@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UserSystem>
+    <Components>
+        <Component id="auth">
+            <Name>Authentication Module</Name>
+            <Description>Quản lý đăng nhập, đăng ký và xác thực người dùng</Description>
+            <Features>
+                <Feature>Đăng nhập</Feature>
+                <Feature>Đăng ký</Feature>
+                <Feature>Quên mật khẩu</Feature>
+                <Feature>Xác thực email</Feature>
+                <Feature>Đăng nhập bằng mạng xã hội</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Database</Dependency>
+                <Dependency>Email Service</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="profile">
+            <Name>User Profile</Name>
+            <Description>Quản lý thông tin cá nhân người dùng</Description>
+            <Features>
+                <Feature>Xem thông tin cá nhân</Feature>
+                <Feature>Cập nhật thông tin cá nhân</Feature>
+                <Feature>Đổi mật khẩu</Feature>
+                <Feature>Quản lý địa chỉ</Feature>
+                <Feature>Lịch sử hoạt động</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Authentication Module</Dependency>
+                <Dependency>Database</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="product">
+            <Name>Product Catalog</Name>
+            <Description>Hiển thị và tìm kiếm sản phẩm</Description>
+            <Features>
+                <Feature>Danh sách sản phẩm</Feature>
+                <Feature>Tìm kiếm sản phẩm</Feature>
+                <Feature>Lọc sản phẩm</Feature>
+                <Feature>Chi tiết sản phẩm</Feature>
+                <Feature>Đánh giá sản phẩm</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Database</Dependency>
+                <Dependency>Search Engine</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="cart">
+            <Name>Shopping Cart</Name>
+            <Description>Quản lý giỏ hàng của người dùng</Description>
+            <Features>
+                <Feature>Thêm sản phẩm vào giỏ</Feature>
+                <Feature>Xóa sản phẩm khỏi giỏ</Feature>
+                <Feature>Cập nhật số lượng</Feature>
+                <Feature>Tính toán tổng tiền</Feature>
+                <Feature>Lưu giỏ hàng</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Product Catalog</Dependency>
+                <Dependency>Database</Dependency>
+                <Dependency>Authentication Module</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="checkout">
+            <Name>Checkout System</Name>
+            <Description>Xử lý thanh toán và đặt hàng</Description>
+            <Features>
+                <Feature>Chọn địa chỉ giao hàng</Feature>
+                <Feature>Chọn phương thức thanh toán</Feature>
+                <Feature>Áp dụng mã giảm giá</Feature>
+                <Feature>Xác nhận đơn hàng</Feature>
+                <Feature>Thanh toán trực tuyến</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Shopping Cart</Dependency>
+                <Dependency>User Profile</Dependency>
+                <Dependency>Payment Gateway</Dependency>
+                <Dependency>Database</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="order">
+            <Name>Order Management</Name>
+            <Description>Quản lý đơn hàng của người dùng</Description>
+            <Features>
+                <Feature>Xem lịch sử đơn hàng</Feature>
+                <Feature>Chi tiết đơn hàng</Feature>
+                <Feature>Theo dõi đơn hàng</Feature>
+                <Feature>Hủy đơn hàng</Feature>
+                <Feature>Đánh giá sau mua hàng</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Checkout System</Dependency>
+                <Dependency>Database</Dependency>
+                <Dependency>Notification Service</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="notification">
+            <Name>Notification System</Name>
+            <Description>Gửi thông báo đến người dùng</Description>
+            <Features>
+                <Feature>Thông báo đơn hàng</Feature>
+                <Feature>Thông báo khuyến mãi</Feature>
+                <Feature>Thông báo hệ thống</Feature>
+                <Feature>Email thông báo</Feature>
+                <Feature>Push notification</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Email Service</Dependency>
+                <Dependency>Database</Dependency>
+                <Dependency>Push Notification Service</Dependency>
+            </Dependencies>
+        </Component>
+        
+        <Component id="wishlist">
+            <Name>Wishlist</Name>
+            <Description>Quản lý danh sách sản phẩm yêu thích</Description>
+            <Features>
+                <Feature>Thêm vào danh sách yêu thích</Feature>
+                <Feature>Xóa khỏi danh sách yêu thích</Feature>
+                <Feature>Xem danh sách yêu thích</Feature>
+                <Feature>Chuyển từ yêu thích sang giỏ hàng</Feature>
+            </Features>
+            <Dependencies>
+                <Dependency>Product Catalog</Dependency>
+                <Dependency>Authentication Module</Dependency>
+                <Dependency>Database</Dependency>
+            </Dependencies>
+        </Component>
+    </Components>
+    
+    <DataFlow>
+        <Flow from="auth" to="profile">Thông tin người dùng sau xác thực</Flow>
+        <Flow from="product" to="cart">Thông tin sản phẩm được thêm vào giỏ hàng</Flow>
+        <Flow from="cart" to="checkout">Thông tin giỏ hàng để thanh toán</Flow>
+        <Flow from="profile" to="checkout">Thông tin người dùng cho thanh toán</Flow>
+        <Flow from="checkout" to="order">Thông tin đơn hàng đã xác nhận</Flow>
+        <Flow from="order" to="notification">Thông tin đơn hàng để gửi thông báo</Flow>
+        <Flow from="product" to="wishlist">Thông tin sản phẩm yêu thích</Flow>
+        <Flow from="wishlist" to="cart">Chuyển sản phẩm từ yêu thích sang giỏ hàng</Flow>
+    </DataFlow>
+    
+    <UserInterface>
+        <Page id="home">
+            <Name>Trang chủ</Name>
+            <Components>
+                <ComponentRef>product</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="login">
+            <Name>Đăng nhập</Name>
+            <Components>
+                <ComponentRef>auth</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="register">
+            <Name>Đăng ký</Name>
+            <Components>
+                <ComponentRef>auth</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="product_detail">
+            <Name>Chi tiết sản phẩm</Name>
+            <Components>
+                <ComponentRef>product</ComponentRef>
+                <ComponentRef>cart</ComponentRef>
+                <ComponentRef>wishlist</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="cart_page">
+            <Name>Giỏ hàng</Name>
+            <Components>
+                <ComponentRef>cart</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="checkout_page">
+            <Name>Thanh toán</Name>
+            <Components>
+                <ComponentRef>checkout</ComponentRef>
+                <ComponentRef>profile</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="order_history">
+            <Name>Lịch sử đơn hàng</Name>
+            <Components>
+                <ComponentRef>order</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="order_detail">
+            <Name>Chi tiết đơn hàng</Name>
+            <Components>
+                <ComponentRef>order</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="profile_page">
+            <Name>Trang cá nhân</Name>
+            <Components>
+                <ComponentRef>profile</ComponentRef>
+                <ComponentRef>order</ComponentRef>
+            </Components>
+        </Page>
+        
+        <Page id="wishlist_page">
+            <Name>Danh sách yêu thích</Name>
+            <Components>
+                <ComponentRef>wishlist</ComponentRef>
+            </Components>
+        </Page>
+    </UserInterface>
+</UserSystem>

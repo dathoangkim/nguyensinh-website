@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Yêu Thích - Nguyên Sinh</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles specific to wishlist page */
+        .wishlist-container {
+            padding: 30px 0;
+        }
+        
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .wishlist-item {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .wishlist-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .wishlist-item-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .wishlist-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .wishlist-item:hover .wishlist-item-image img {
+            transform: scale(1.1);
+        }
+        
+        .wishlist-item-info {
+            padding: 20px;
+        }
+        
+        .wishlist-item-title {
+            font-size: 1.3rem;
+            margin: 0 0 10px 0;
+        }
+        
+        .wishlist-item-price {
+            color: var(--secondary-color);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .wishlist-item-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .clear-wishlist {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        
+        .btn-danger {
+            background-color: #e74c3c;
+            color: #fff;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        
+        .empty-wishlist {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        
+        .empty-wishlist i {
+            font-size: 3rem;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+        
+        .empty-wishlist h3 {
+            margin-bottom: 10px;
+        }
+        
+        .empty-wishlist p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .wishlist-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="/index.html">
+                    <img src="/img/hero.1280X1280.PNG" alt="Nguyên Sinh Logo">
+                </a>
+            </div>
+            <nav>
+                <ul class="main-menu">
+                    <li><a href="/index.html">Trang Chủ</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="menu.html">Thực Đơn</a></li>
+                    <li><a href="order.html">Đặt Hàng</a></li>
+                    <li><a href="blog.html">Tin Tức</a></li>
+                    <li><a href="admin.html">Quản lý</a></li>
+                    <li><a href="locations.html">Cửa Hàng</a></li>
+                    <li><a href="account.html">Tài Khoản</a></li>
+                    <li><a href="cart.html">Giỏ hàng</a></li>
+                    <li><a href="wishlist.html" class="active">Yêu thích</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="height: 40vh; min-height: 300px;">
+        <div class="hero-content">
+            <h1>Danh Sách Yêu Thích</h1>
+            <h2>Những sản phẩm bạn đã lưu lại để xem sau</h2>
+        </div>
+    </section>
+
+    <!-- Wishlist Section -->
+    <section class="wishlist-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Sản Phẩm Yêu Thích</h2>
+                <div class="divider"></div>
+                <p>Những sản phẩm bạn đã đánh dấu để xem sau hoặc mua sau</p>
+            </div>
+            
+            <div class="wishlist-container">
+                <!-- Wishlist items will be loaded here -->
+                <div class="loading">Đang tải danh sách yêu thích...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Khám Phá Thêm Sản Phẩm</h2>
+                <p>Tiếp tục khám phá các sản phẩm khác của chúng tôi</p>
+                <div class="cta-buttons">
+                    <a href="menu.html" class="btn btn-primary">Xem Thực Đơn</a>
+                    <a href="cart.html" class="btn btn-secondary">Xem Giỏ Hàng</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="/img/hero.1280X1280 copy.PNG" alt="Nguyên Sinh Logo">
+                    <p>Nguyên bản gia truyền - 3 đời một vị</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Liên Kết Nhanh</h3>
+                    <ul>
+                        <li><a href="../index.html">Trang Chủ</a></li>
+                        <li><a href="about.html">Giới Thiệu</a></li>
+                        <li><a href="menu.html">Thực Đơn</a></li>
+                        <li><a href="order.html">Đặt Hàng</a></li>
+                        <li><a href="blog.html">Tin Tức</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Thông Tin Liên Hệ</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 141 Trần Đình Xu, Quận 1, TP.HCM</p>
+                    <p><i class="fas fa-phone"></i> Hotline: 08.1942.1942</p>
+                    <p><i class="fab fa-whatsapp"></i> Zalo: 0988.57.57.54</p>
+                    <p><i class="fas fa-envelope"></i> info@nguyensinh.com</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Kết Nối Với Chúng Tôi</h3>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/NguyenSinhHaNoi" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/nguyensinh.bistro/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://zalo.me/s/3478851884659907934/" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://g.page/r/Ceim_ECSeT-9EBM/review" target="_blank"><i class="fab fa-google"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nguyên Sinh. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/wishlist.js"></script>
+</body>
+</html>

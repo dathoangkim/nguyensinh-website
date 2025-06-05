@@ -1,0 +1,2776 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới Thiệu - Nguyên Sinh</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2691E;
+            --light-brown: #F4A460;
+            --cream: #FFF8DC;
+            --dark-brown: #654321;
+            --gold: #FFD700;
+            --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-gold: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.15);
+            --shadow-heavy: 0 15px 50px rgba(0, 0, 0, 0.2);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-brown);
+            overflow-x: hidden;
+        }
+
+        /* Enhanced Hero Section */
+        .about-hero {
+            height: 100vh;
+            min-height: 600px;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), 
+                        url('../img/hero.1280X1280 copy.PNG') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-content h2 {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            margin-bottom: 40px;
+            opacity: 0.8;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .hero-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-btn.primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .hero-btn.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator i {
+            font-size: 2rem;
+        }
+
+        /* Enhanced Stats Section */
+        .stats-section {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Enhanced Story Section */
+        .story-section {
+            padding: 100px 0;
+            background: linear-gradient(45deg, #fafafa 0%, #f5f5f5 100%);
+        }
+
+        .story-intro {
+            max-width: 800px;
+            margin: 0 auto 80px;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .story-intro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+
+        .story-intro p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        /* Enhanced Timeline */
+        .timeline-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gradient-primary);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 80px;
+            width: 50%;
+            padding: 0 60px;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            text-align: left;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            border: 4px solid var(--primary-color);
+            border-radius: 50%;
+            z-index: 2;
+            box-shadow: 0 0 0 4px white, 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -10px;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -30px;
+            border-left-color: white;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -30px;
+            border-right-color: white;
+        }
+
+        .timeline-year {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .timeline-year::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-gold);
+            border-radius: 2px;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-year::after {
+            right: 0;
+            left: auto;
+        }
+
+        .timeline-description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        /* Enhanced Certificate Section */
+        .certificate-section {
+            padding: 100px 0;
+            background: var(--cream);
+            position: relative;
+        }
+
+        .certificate-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('../img/pattern.png') repeat;
+            opacity: 0.05;
+        }
+
+        .certificate-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .certificate-image {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .certificate-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-gold);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1;
+        }
+
+        .certificate-image:hover::before {
+            opacity: 0.1;
+        }
+
+        .certificate-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .certificate-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .certificate-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .certificate-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #555;
+        }
+
+        .certificate-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gradient-gold);
+            color: var(--dark-brown);
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        /* Enhanced Values Section */
+        .values-section {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .value-card {
+            background: white;
+            padding: 50px 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            position: relative;
+            transition: var(--transition);
+            border: 1px solid #f0f0f0;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-medium);
+        }
+
+            .value-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            position: relative;
+            z-index: 1;
+            transition: var(--transition);
+        }
+
+        .value-card:hover .value-icon {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.3);
+        }
+
+        .value-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .value-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            position: relative;
+            z-index: 1;
+        }
+
+        .value-card p {
+            line-height: 1.7;
+            color: #666;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Enhanced Team Section */
+        .team-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .member-image {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .team-member:hover .member-image img {
+            transform: scale(1.1);
+        }
+
+        .member-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .team-member:hover .member-overlay {
+            opacity: 0.9;
+        }
+
+        .member-social {
+            display: flex;
+            gap: 15px;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .team-member:hover .member-social {
+            transform: translateY(0);
+        }
+
+        .member-social a {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .member-social a:hover {
+            transform: scale(1.1);
+            background: var(--gold);
+        }
+
+        .member-info {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .member-info h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .member-info .position {
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .member-info p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Enhanced CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('../img/hero.1280X1280 copy.PNG') center/cover;
+            opacity: 0.1;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 30px;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 18px 35px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-btn.primary {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-5px) translateX(-50%);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(2deg);
+            }
+        }
+
+        /* Counter Animation */
+        .counter {
+            display: inline-block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                text-align: left !important;
+                padding-left: 80px;
+                padding-right: 20px;
+            }
+
+            .timeline-item::before {
+                left: 20px !important;
+                right: auto !important;
+            }
+
+            .timeline-content::before {
+                left: -30px !important;
+                right: auto !important;
+                border-right-color: white !important;
+                border-left-color: transparent !important;
+            }
+
+            .timeline-year::after {
+                left: 0 !important;
+                right: auto !important;
+            }
+
+            .certificate-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                padding-left: 60px;
+            }
+
+            .timeline-content {
+                padding: 25px;
+            }
+
+            .value-card {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* Parallax Effect */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../img/hero.1280X1280 copy.PNG" alt="Nguyên Sinh Logo">
+                </a>
+            </div>
+            <nav>
+                <ul class="main-menu">
+                    <li><a href="../index.html">Trang Chủ</a></li>
+                    <li><a href="about.html" class="active">Giới Thiệu</a></li>
+                    <li><a href="menu.html">Thực Đơn</a></li>
+                    <li><a href="order.html">Đặt Hàng</a></li>
+                    <li><a href="blog.html">Tin Tức</a></li>
+                    <li><a href="admin.html">Quản lý</a></li>
+                    <li><a href="locations.html">Cửa Hàng</a></li>
+                    <li><a href="account.html">Tài Khoản</a></li>
+                    <li><a href="cart.html">Giỏ hàng</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="about-hero parallax">
+        <div class="hero-content">
+            <h1 data-aos="fade-up">Nguyên Sinh</h1>
+            <h2 data-aos="fade-up" data-aos-delay="300">Nguyên bản gia truyền - 3 đời một vị</h2>
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="600">
+                Hành trình 50 năm gìn giữ hương vị truyền thống Việt Nam
+            </p>
+            <div class="hero-cta" data-aos="fade-up" data-aos-delay="900">
+                <a href="#story" class="hero-btn primary">
+                    <i class="fas fa-book-open"></i>
+                    Câu Chuyện Của Chúng Tôi
+                </a>
+                <a href="menu.html" class="hero-btn secondary">
+                    <i class="fas fa-utensils"></i>
+                    Xem Thực Đơn
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-number counter" data-target="50">0</div>
+                <div class="stat-label">Năm Kinh Nghiệm</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-number counter" data-target="3">0</div>
+                <div class="stat-label">Thế Hệ Gia Truyền</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-number counter" data-target="100000">0</div>
+                <div class="stat-label">Khách Hàng Hài Lòng</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+                <div class="stat-number counter" data-target="15">0</div>
+                <div class="stat-label">Cửa Hàng Toàn Quốc</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section id="story" class="story-section">
+        <div class="story-intro" data-aos="fade-up">
+            <h2>Câu Chuyện Của Chúng Tôi</h2>
+            <p>
+                Từ một quầy bánh mì nhỏ bên góc phố Sài Gòn năm 1974, Nguyên Sinh đã trở thành 
+                biểu tượng của hương vị bánh mì truyền thống Việt Nam. Với tâm huyết và sự tận tâm 
+                qua ba thế hệ, chúng tôi không ngừng gìn giữ và phát triển những công thức gia truyền 
+                độc đáo.
+            </p>
+        </div>
+
+        <div class="timeline-container">
+            <div class="timeline">
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1974</div>
+                                      <div class="timeline-description">
+                            Ông Nguyễn Văn Sinh khởi nghiệp với quầy bánh mì đầu tiên tại góc phố Trần Đình Xu, 
+                            Quận 1, TP.HCM. Với công thức bánh mì độc đáo và tình yêu ẩm thực, ông đã tạo nên 
+                            những ổ bánh mì thơm ngon đầu tiên của thương hiệu Nguyên Sinh.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-left">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1985</div>
+                        <div class="timeline-description">
+                            Thế hệ thứ hai - con trai ông Sinh tiếp nối sự nghiệp gia đình. Mở rộng thêm 3 cửa hàng 
+                            mới và bắt đầu nghiên cứu các loại bánh mì đặc sản từ các vùng miền khác nhau của Việt Nam.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1995</div>
+                        <div class="timeline-description">
+                            Ra mắt bánh mì thịt nướng đặc biệt - món ăn signature của Nguyên Sinh. Công thức ướp thịt 
+                            bí truyền kết hợp với bánh mì giòn rụm đã tạo nên hương vị khó quên trong lòng thực khách.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-left">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2005</div>
+                        <div class="timeline-description">
+                            Nhận chứng nhận "Thương hiệu uy tín" từ Hiệp hội Ẩm thực Việt Nam. Mở rộng chuỗi cửa hàng 
+                            ra các tỉnh thành lân cận và bắt đầu phục vụ khách du lịch quốc tế.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2015</div>
+                        <div class="timeline-description">
+                            Thế hệ thứ ba chính thức tiếp quản và hiện đại hóa hệ thống. Ứng dụng công nghệ trong 
+                            quản lý và phục vụ khách hàng, đồng thời vẫn giữ nguyên hương vị truyền thống.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-left">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2024</div>
+                        <div class="timeline-description">
+                            Nguyên Sinh hiện có 15 cửa hàng trên toàn quốc và đang mở rộng ra thị trường quốc tế. 
+                            Chúng tôi tự hào là thương hiệu bánh mì Việt Nam được yêu thích nhất, với hơn 100,000 
+                            khách hàng trung thành.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Section -->
+    <section class="certificate-section">
+        <div class="certificate-content">
+            <div class="certificate-image" data-aos="fade-right">
+                <img src="../img/2 CHA CON CHỤP KỶ LỤC.jpg" alt="Chứng nhận chất lượng Nguyên Sinh">
+            </div>
+            <div class="certificate-text" data-aos="fade-left">
+                <h3>Chứng Nhận Chất Lượng</h3>
+                <p>
+                    Nguyên Sinh tự hào là thương hiệu bánh mì đầu tiên tại Việt Nam nhận được chứng nhận 
+                    ISO 22000:2018 về an toàn thực phẩm. Chúng tôi cam kết mang đến cho khách hàng những 
+                    sản phẩm chất lượng cao nhất.
+                </p>
+                <p>
+                    Với hệ thống quản lý chất lượng nghiêm ngặt từ khâu chọn nguyên liệu đến sản xuất và 
+                    phục vụ, mỗi ổ bánh mì Nguyên Sinh đều đảm bảo tiêu chuẩn vệ sinh an toàn thực phẩm 
+                    quốc tế.
+                </p>
+                <div class="certificate-badge">
+                    <i class="fas fa-award"></i>
+                    <span>ISO 22000:2018 Certified</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Giá Trị Cốt Lõi</h2>
+                <p>Những nguyên tắc định hướng mọi hoạt động của chúng tôi</p>
+                <div class="divider"></div>
+            </div>
+
+            <div class="values-grid">
+                <div class="value-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h4>Tình Yêu Ẩm Thực</h4>
+                    <p>
+                        Chúng tôi đặt tình yêu và đam mê ẩm thực vào từng sản phẩm, 
+                        tạo nên những hương vị độc đáo và khó quên.
+                    </p>
+                </div>
+
+                <div class="value-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="value-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h4>Nguyên Liệu Tươi Ngon</h4>
+                    <p>
+                        Chỉ sử dụng nguyên liệu tươi ngon nhất, được tuyển chọn kỹ lưỡng 
+                        từ các nhà cung cấp uy tín.
+                    </p>
+                </div>
+
+                <div class="value-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Phục Vụ Tận Tâm</h4>
+                    <p>
+                        Đội ngũ nhân viên được đào tạo chuyên nghiệp, luôn sẵn sàng 
+                        mang đến trải nghiệm tuyệt vời cho khách hàng.
+                    </p>
+                </div>
+
+                <div class="value-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="value-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>An Toàn Thực Phẩm</h4>
+                    <p>
+                        Tuân thủ nghiêm ngặt các tiêu chuẩn vệ sinh an toàn thực phẩm 
+                        quốc tế, đảm bảo sức khỏe khách hàng.
+                    </p>
+                </div>
+
+                <div class="value-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="value-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h4>Truyền Thống Gia Truyền</h4>
+                    <p>
+                        Gìn giữ và phát huy những công thức gia truyền qua ba thế hệ, 
+                        mang đến hương vị đậm đà bản sắc Việt.
+                    </p>
+                </div>
+
+                <div class="value-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="value-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h4>Đổi Mới Sáng Tạo</h4>
+                    <p>
+                        Không ngừng đổi mới và sáng tạo trong cách thức phục vụ, 
+                        ứng dụng công nghệ để nâng cao trải nghiệm khách hàng.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Đội Ngũ Của Chúng Tôi</h2>
+                <p>Những con người tài năng đằng sau thành công của Nguyên Sinh</p>
+                <div class="divider"></div>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-member" data-aos="fade-up" data-aos-delay="100">
+                    <div class="member-image">
+                        <img src="../img/UPLOADING_23.jpg" alt="Nguyễn Văn Minh">
+                        <div class="member-overlay">
+                            <div class="member-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h4>Nguyễn Văn Minh</h4>
+                        <div class="position">Tổng Giám Đốc</div>
+                        <p>
+                            Thế hệ thứ ba của gia đình, với 15 năm kinh nghiệm trong ngành F&B 
+                            và tầm nhìn hiện đại hóa thương hiệu gia truyền.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="team-member" data-aos="fade-up" data-aos-delay="200">
+                    <div class="member-image">
+                        <img src="../img/UPLOADING_25.jpg" alt="Trần Thị Lan">
+                        <div class="member-overlay">
+                            <div class="member-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h4>Trần Thị Lan</h4>
+                        <div class="position">Trưởng Phòng R&D</div>
+                        <p>
+                            Chuyên gia nghiên cứu và phát triển sản phẩm với 12 năm kinh nghiệm, 
+                            luôn sáng tạo những hương vị mới mẻ.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="team-member" data-aos="fade-up" data-aos-delay="300">
+                    <div class="member-image">
+                        <img src="../img/LHBM 3.jpg" alt="Lê Hoàng Nam">
+                        <div class="member-overlay">
+                            <div class="member-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h4>Lê Hoàng Nam</h4>
+                        <div class="position">Bếp Trưởng</div>
+                        <p>
+                            Bếp trưởng tài năng với 20 năm kinh nghiệm, người gìn giữ 
+                            và truyền đạt những bí quyết gia truyền.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    
+    <!-- CTA Section -->
+</section>
+
+       </section>
+
+    <!-- CTA Section -->
+   <section class="cta-section">
+        <div class="cta-content">
+            <h2 data-aos="fade-up">Trải Nghiệm Hương Vị Nguyên Sinh</h2>
+            <p data-aos="fade-up" data-aos-delay="200">
+                Hãy đến và cảm nhận sự khác biệt của những ổ bánh mì được làm từ tình yêu 
+                và sự tận tâm qua ba thế hệ. Chúng tôi cam kết mang đến cho bạn trải nghiệm 
+                ẩm thực khó quên.
+            </p>
+            <div class="cta-buttons" data-aos="fade-up" data-aos-delay="400">
+                <a href="menu.html" class="cta-btn primary">
+                    <i class="fas fa-utensils"></i>
+                    Xem Thực Đơn
+                </a>
+                <a href="locations.html" class="cta-btn secondary">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Tìm Cửa Hàng
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="../img/hero.1280X1280 copy.PNG" alt="Nguyên Sinh Logo">
+                    <p>Nguyên bản gia truyền - 3 đời một vị</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/NguyenSinhHaNoi" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/nguyensinh.bistro/" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://zalo.me/s/3478851884659907934/" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://g.page/r/Ceim_ECSeT-9EBM/review" target="_blank">
+                            <i class="fab fa-google"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Liên Kết Nhanh</h3>
+                    <ul>
+                        <li><a href="../index.html">Trang Chủ</a></li>
+                        <li><a href="about.html">Giới Thiệu</a></li>
+                        <li><a href="menu.html">Thực Đơn</a></li>
+                        <li><a href="order.html">Đặt Hàng</a></li>
+                        <li><a href="blog.html">Tin Tức</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>Thông Tin Liên Hệ</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>141 Trần Đình Xu, Quận 1, TP.HCM</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>Hotline: 08.1942.1942</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Zalo: 0988.57.57.54</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@nguyensinh.com</span>
+                    </div>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h3>Đăng Ký Nhận Tin</h3>
+                    <p>Nhận thông tin về các món mới và ưu đãi đặc biệt</p>
+                    <form class="newsletter-form">
+                        <div class="input-group">
+                            <input type="email" placeholder="Email của bạn" required>
+                            <button type="submit">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="footer-certifications">
+                        <img src="../img/iso-cert.png" alt="ISO Certification">
+                        <img src="../img/food-safety.png" alt="Food Safety Certification">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 Nguyên Sinh. Tất cả quyền được bảo lưu.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Chính sách bảo mật</a>
+                        <a href="#">Điều khoản sử dụng</a>
+                        <a href="#">Chính sách đổi trả</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS
+            AOS.init({
+                duration: 1000,
+                easing: 'ease-out-cubic',
+                once: true,
+                offset: 100
+            });
+
+            // Counter Animation
+            function animateCounter(element) {
+                const target = parseInt(element.getAttribute('data-target'));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    
+                    if (target >= 1000) {
+                        element.textContent = Math.floor(current).toLocaleString();
+                    } else {
+                        element.textContent = Math.floor(current);
+                    }
+                }, 16);
+            }
+
+            // Intersection Observer for counters
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                        entry.target.classList.add('animated');
+                        animateCounter(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            document.querySelectorAll('.counter').forEach(counter => {
+                counterObserver.observe(counter);
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Back to top button
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Parallax effect for hero section
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const parallaxElements = document.querySelectorAll('.parallax');
+                
+                parallaxElements.forEach(element => {
+                    const speed = 0.5;
+                    element.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+            });
+
+            // Newsletter form submission
+            const newsletterForm = document.querySelector('.newsletter-form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = this.querySelector('input[type="email"]').value;
+                    
+                    // Simulate API call
+                    const button = this.querySelector('button');
+                    const originalHTML = button.innerHTML;
+                    
+                    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                    button.disabled = true;
+                    
+                    setTimeout(() => {
+                        button.innerHTML = '<i class="fas fa-check"></i>';
+                        this.querySelector('input').value = '';
+                        
+                        setTimeout(() => {
+                            button.innerHTML = originalHTML;
+                            button.disabled = false;
+                        }, 2000);
+                    }, 1000);
+                });
+            }
+
+            // Loading animation for images
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('load', function() {
+                    this.classList.add('loaded');
+                });
+            });
+
+            // Enhanced mobile menu
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mainMenu = document.querySelector('.main-menu');
+            
+            if (mobileMenuToggle && mainMenu) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    mainMenu.classList.toggle('active');
+                    document.body.classList.toggle('menu-open');
+                });
+
+                // Close menu when clicking on a link
+                mainMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenuToggle.classList.remove('active');
+                        mainMenu.classList.remove('active');
+                        document.body.classList.remove('menu-open');
+                    });
+                });
+            }
+
+            // Lazy loading for images
+            const lazyImages = document.querySelectorAll('img[data-src]');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            lazyImages.forEach(img => imageObserver.observe(img));
+
+            // Add loading class to elements for staggered animations
+            const animatedElements = document.querySelectorAll('[data-aos]');
+            animatedElements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.1}s`;
+                element.classList.add('loading');
+            });
+
+            // Performance optimization: Throttle scroll events
+            let ticking = false;
+            function updateScrollEffects() {
+                // Update parallax and other scroll-based effects here
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateScrollEffects);
+                    ticking = true;
+                }
+            });
+
+            console.log('✅ About page initialized successfully');
+        });
+
+        // Additional CSS for enhanced effects
+        const additionalStyles = `
+            <style>
+                .back-to-top {
+                    position: fixed;
+                    bottom: 30px;
+                    right: 30px;
+                    width: 50px;
+                    height: 50px;
+                    background: var(--gradient-primary);
+                    color: white;
+                    border: none;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: var(--transition);
+                    z-index: 1000;
+                    box-shadow: var(--shadow-medium);
+                }
+
+                .back-to-top.show {
+                    opacity: 1;
+                    visibility: visible;
+                }
+
+                .back-to-top:hover {
+                    transform: translateY(-3px);
+                    box-shadow: var(--shadow-heavy);
+                }
+
+                .footer-social {
+                    display: flex;
+                    gap: 15px;
+                    margin-top: 20px;
+                }
+
+                .footer-social a {
+                    width: 40px;
+                    height: 40px;
+                    background: var(--gradient-primary);
+                    color: white;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: var(--transition);
+                }
+
+                .footer-social a:hover {
+                    transform: translateY(-3px);
+                    box-shadow: var(--shadow-medium);
+                }
+
+                .contact-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    margin-bottom: 15px;
+                }
+
+                .contact-item i {
+                    width: 20px;
+                    color: var(--primary-color);
+                }
+
+                .newsletter-form .input-group {
+                    display: flex;
+                    margin-top: 15px;
+                    border-radius: 25px;
+                    overflow: hidden;
+                    box-shadow: var(--shadow-light);
+                }
+
+                .newsletter-form input {
+                    flex: 1;
+                    padding: 12px 20px;
+                    border: none;
+                    outline: none;
+                    font-size: 14px;
+                }
+
+                .newsletter-form button {
+                    padding: 12px 20px;
+                    background: var(--gradient-primary);
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                    transition: var(--transition);
+                }
+
+                .newsletter-form button:hover {
+                    background: var(--gradient-gold);
+                }
+
+                .footer-certifications {
+                    display: flex;
+                    gap: 10px;
+                    margin-top: 20px;
+                }
+
+                .footer-certifications img {
+                    height: 40px;
+                    opacity: 0.7;
+                    transition: var(--transition);
+                }
+
+                .footer-certifications img:hover {
+                    opacity: 1;
+                }
+
+                .footer-bottom {
+                    border-top: 1px solid #eee;
+                    padding-top: 30px
+                    margin-top: 50px;
+                }
+
+                .footer-bottom-content {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    gap: 20px;
+                }
+
+                .footer-bottom-links {
+                    display: flex;
+                    gap: 20px;
+                }
+
+                .footer-bottom-links a {
+                    color: #666;
+                    text-decoration: none;
+                    font-size: 14px;
+                    transition: var(--transition);
+                }
+
+                .footer-bottom-links a:hover {
+                    color: var(--primary-color);
+                }
+
+                img.lazy {
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                }
+
+                img.loaded {
+                    opacity: 1;
+                }
+
+                /* CTA Section Styles */
+                .cta-section {
+                    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+                    color: white;
+                    padding: 100px 0;
+                    text-align: center;
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .cta-section::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: url('../img/hero.1280X1280 copy.PNG') center/cover;
+                    opacity: 0.1;
+                    z-index: 1;
+                }
+
+                .cta-content {
+                    position: relative;
+                    z-index: 2;
+                    max-width: 800px;
+                    margin: 0 auto;
+                    padding: 0 20px;
+                }
+
+                .cta-section h2 {
+                    font-family: 'Playfair Display', serif;
+                    font-size: 3rem;
+                    font-weight: 700;
+                    margin-bottom: 30px;
+                    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+                }
+
+                .cta-section p {
+                    font-size: 1.2rem;
+                    line-height: 1.8;
+                    margin-bottom: 40px;
+                    opacity: 0.95;
+                }
+
+                .cta-buttons {
+                    display: flex;
+                    gap: 20px;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                }
+
+                .cta-btn {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 15px 30px;
+                    border-radius: 50px;
+                    text-decoration: none;
+                    font-weight: 600;
+                    font-size: 1.1rem;
+                    transition: var(--transition);
+                    border: 2px solid transparent;
+                    min-width: 200px;
+                    justify-content: center;
+                }
+
+                .cta-btn.primary {
+                    background: white;
+                    color: var(--primary-color);
+                    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+                }
+
+                .cta-btn.primary:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+                    background: var(--cream);
+                }
+
+                .cta-btn.secondary {
+                    background: transparent;
+                    color: white;
+                    border-color: white;
+                }
+
+                .cta-btn.secondary:hover {
+                    background: white;
+                    color: var(--primary-color);
+                    transform: translateY(-3px);
+                    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+                }
+
+                @media (max-width: 768px) {
+                    .footer-bottom-content {
+                        flex-direction: column;
+                        text-align: center;
+                    }
+
+                    .footer-bottom-links {
+                        flex-direction: column;
+                        gap: 10px;
+                    }
+
+                    .back-to-top {
+                        bottom: 20px;
+                        right: 20px;
+                        width: 45px;
+                        height: 45px;
+                    }
+
+                    .newsletter-form .input-group {
+                        flex-direction: column;
+                        border-radius: var(--border-radius);
+                    }
+
+                    .newsletter-form input {
+                        border-radius: var(--border-radius) var(--border-radius) 0 0;
+                    }
+
+                    .newsletter-form button {
+                        border-radius: 0 0 var(--border-radius) var(--border-radius);
+                    }
+
+                    .cta-section {
+                        padding: 60px 0;
+                    }
+
+                    .cta-section h2 {
+                        font-size: 2.2rem;
+                        margin-bottom: 20px;
+                    }
+
+                    .cta-section p {
+                        font-size: 1.1rem;
+                        margin-bottom: 30px;
+                    }
+
+                    .cta-buttons {
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 15px;
+                    }
+
+                    .cta-btn {
+                        width: 100%;
+                        max-width: 280px;
+                        padding: 12px 25px;
+                        font-size: 1rem;
+                    }
+                }
+
+                /* Enhanced animations */
+                @keyframes slideInFromLeft {
+                    from {
+                        opacity: 0;
+                        transform: translateX(-50px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                }
+
+                @keyframes slideInFromRight {
+                    from {
+                        opacity: 0;
+                        transform: translateX(50px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                }
+
+                @keyframes scaleIn {
+                    from {
+                        opacity: 0;
+                        transform: scale(0.8);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: scale(1);
+                    }
+                }
+
+                @keyframes fadeInUp {
+                    from {
+                        opacity: 0;
+                        transform: translateY(30px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                /* Loading states */
+                .loading {
+                    opacity: 0;
+                    animation: fadeInUp 0.6s ease-out forwards;
+                }
+
+                /* Enhanced hover effects */
+                .timeline-item:hover .timeline-content {
+                    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+                    transform: translateY(-5px);
+                    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+                }
+
+                .stat-item:hover {
+                    background: rgba(255, 255, 255, 0.25);
+                    backdrop-filter: blur(15px);
+                    transform: translateY(-10px);
+                }
+
+                .team-member:hover {
+                    transform: translateY(-15px) scale(1.02);
+                }
+
+                .value-card:hover {
+                    transform: translateY(-10px);
+                    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+                }
+
+                .value-card:hover .value-icon {
+                    transform: scale(1.2) rotate(5deg);
+                    color: var(--secondary-color);
+                }
+
+                /* Custom scrollbar for webkit browsers */
+                ::-webkit-scrollbar {
+                    width: 12px;
+                }
+
+                ::-webkit-scrollbar-track {
+                    background: #f1f1f1;
+                    border-radius: 6px;
+                }
+
+                ::-webkit-scrollbar-thumb {
+                    background: var(--gradient-primary);
+                    border-radius: 6px;
+                    border: 2px solid #f1f1f1;
+                }
+
+                ::-webkit-scrollbar-thumb:hover {
+                    background: var(--gradient-gold);
+                }
+
+                /* Focus states for accessibility */
+                .hero-btn:focus,
+                .cta-btn:focus,
+                .back-to-top:focus {
+                    outline: 3px solid rgba(139, 69, 19, 0.5);
+                    outline-offset: 2px;
+                }
+
+                /* Print styles */
+                @media print {
+                    .back-to-top,
+                    .scroll-indicator,
+                    .member-overlay,
+                    .newsletter-form,
+                    .cta-section {
+                        display: none !important;
+                    }
+
+                    .about-hero {
+                        height: auto;
+                        min-height: 300px;
+                    }
+
+                    .parallax {
+                        background-attachment: scroll !important;
+                    }
+
+                    footer {
+                        page-break-inside: avoid;
+                    }
+                }
+
+                /* High contrast mode support */
+                @media (prefers-contrast: high) {
+                    .timeline-content,
+                    .value-card,
+                    .team-member {
+                        border: 2px solid var(--dark-brown);
+                    }
+
+                    .hero-btn,
+                    .cta-btn {
+                        border: 2px solid currentColor;
+                    }
+
+                    .cta-section {
+                        background: var(--dark-brown);
+                    }
+                }
+
+                /* Reduced motion support */
+                @media (prefers-reduced-motion: reduce) {
+                    *,
+                    *::before,
+                    *::after {
+                        animation-duration: 0.01ms !important;
+                        animation-iteration-count: 1 !important;
+                        transition-duration: 0.01ms !important;
+                    }
+
+                    .parallax {
+                        transform: none !important;
+                    }
+
+                    .cta-btn:hover,
+                    .timeline-item:hover .timeline-content,
+                    .stat-item:hover,
+                    .team-member:hover,
+                    .value-card:hover {
+                        transform: none !important;
+                    }
+                }
+
+                /* Dark mode support */
+                @media (prefers-color-scheme: dark) {
+                    :root {
+                        --dark-brown: #f5f5f5;
+                        --cream: #1a1a1a;
+                    }
+
+                    .story-section {
+                        background: linear-gradient(45deg, #2a2a2a 0%, #1f1f1f 100%);
+                    }
+
+                    .timeline-content,
+                    .value-card,
+                    .team-member {
+                        background: #2a2a2a;
+                        color: #f5f5f5;
+                    }
+
+                    .certificate-section {
+                        background: #1f1f1f;
+                    }
+
+                    footer {
+                        background: #1a1a1a;
+                        color: #f5f5f5;
+                    }
+
+                    .footer-bottom {
+                        border-top-color: #333;
+                    }
+                }
+
+                /* Additional CTA enhancements */
+                .cta-section::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 100px;
+                    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));
+                    z-index: 1;
+                }
+
+                .cta-btn i {
+                    transition: transform 0.3s ease;
+                }
+
+                .cta-btn:hover i {
+                    transform: translateX(5px);
+                }
+
+                .cta-btn.secondary:hover i {
+                    transform: scale(1.1);
+                }
+
+                /* Floating animation for CTA buttons */
+                @keyframes float {
+                    0%, 100% {
+                        transform: translateY(0px);
+                    }
+                    50% {
+                        transform: translateY(-10px);
+                    }
+                }
+
+                .cta-btn.primary {
+                    animation: float 3s ease-in-out infinite;
+                    animation-delay: 0s;
+                }
+
+                .cta-btn.secondary {
+                    animation: float 3s ease-in-out infinite;
+                    animation-delay: 1.5s;
+                }
+
+                /* Disable floating animation on hover */
+                .cta-btn:hover {
+                    animation-play-state: paused;
+                }
+
+                /* Enhanced footer styles */
+                footer {
+                    background: linear-gradient(135deg, #2c1810 0%, #1a0f08 100%);
+                    color: #f5f5f5;
+                    padding: 60px 0 0;
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                footer::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: url('../img/hero.1280X1280 copy.PNG') center/cover;
+                    opacity: 0.03;
+                    z-index: 1;
+                }
+
+                .footer-content {
+                    position: relative;
+                    z-index: 2;
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                    gap: 40px;
+                    margin-bottom: 40px;
+                }
+
+                .footer-logo img {
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 50%;
+                    margin-bottom: 20px;
+                    border: 3px solid rgba(255, 255, 255, 0.1);
+                }
+
+                .footer-logo p {
+                    font-style: italic;
+                    color: var(--light-brown);
+                    margin-bottom: 20px;
+                }
+
+                .footer-links h3,
+                .footer-contact h3,
+                .footer-newsletter h3 {
+                    color: white;
+                    margin-bottom: 20px;
+                    font-family: 'Playfair Display', serif;
+                    font-size: 1.3rem;
+                }
+
+                .footer-links ul {
+                    list-style: none;
+                }
+
+                .footer-links li {
+                    margin-bottom: 10px;
+                }
+
+                .footer-links a {
+                    color: #ccc;
+                    text-decoration: none;
+                    transition: var(--transition);
+                    position: relative;
+                }
+
+                .footer-links a::before {
+                    content: '';
+                    position: absolute;
+                    bottom: -2px;
+                    left: 0;
+                    width: 0;
+                    height: 2px;
+                    background: var(--secondary-color);
+                    transition: width 0.3s ease;
+                }
+
+                .footer-links a:hover {
+                    color: var(--secondary-color);
+                    transform: translateX(5px);
+                }
+
+                .footer-links a:hover::before {
+                    width: 100%;
+                }
+
+                .contact-item {
+                    color: #ccc;
+                    margin-bottom: 15px;
+                    transition: var(--transition);
+                }
+
+                .contact-item:hover {
+                    color: white;
+                    transform: translateX(5px);
+                }
+
+                .footer-newsletter p {
+                    color: #ccc;
+                    margin-bottom: 20px;
+                    line-height: 1.6;
+                }
+
+                /* Cookie consent styles */
+                .cookie-consent {
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    background: linear-gradient(135deg, var(--dark-brown) 0%, #2c1810 100%);
+                    color: white;
+                    padding: 20px;
+                    z-index: 10000;
+                    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+                    transform: translateY(100%);
+                    animation: slideUp 0.5s ease-out forwards;
+                    border-top: 3px solid var(--secondary-color);
+                }
+
+                .cookie-content {
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 20px;
+                    flex-wrap: wrap;
+                }
+
+                .cookie-content p {
+                    flex: 1;
+                    margin: 0;
+                    line-height: 1.5;
+                }
+
+                .cookie-accept {
+                    background: var(--gradient-primary);
+                    color: white;
+                    border: none;
+                    padding: 12px 25px;
+                    border-radius: 25px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    transition: var(--transition);
+                    white-space: nowrap;
+                    box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+                }
+
+                .cookie-accept:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+                    background: var(--gradient-gold);
+                }
+
+                @keyframes slideUp {
+                    to {
+                        transform: translateY(0);
+                    }
+                }
+
+                /* Responsive adjustments */
+                @media (max-width: 1024px) {
+                    .cta-section {
+                        padding: 80px 0;
+                    }
+
+                    .cta-section h2 {
+                        font-size: 2.5rem;
+                    }
+
+                    .footer-content {
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 30px;
+                    }
+                }
+
+                @media (max-width: 768px) {
+                    .footer-content {
+                        grid-template-columns: 1fr;
+                        text-align: center;
+                    }
+
+                    .footer-social {
+                        justify-content: center;
+                    }
+
+                    .contact-item {
+                        justify-content: center;
+                    }
+
+                    .cookie-content {
+                        flex-direction: column;
+                        text-align: center;
+                        gap: 15px;
+                    }
+
+                    .cookie-consent {
+                        padding: 15px;
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    .cta-section {
+                        padding: 60px 0;
+                    }
+
+                    .cta-section h2 {
+                        font-size: 2rem;
+                    }
+
+                    .cta-content {
+                        padding: 0 15px;
+                    }
+
+                    footer {
+                        padding: 40px 0 0;
+                    }
+
+                    .footer-content {
+                        gap: 25px;
+                    }
+                }
+
+                /* Error handling styles */
+                .error-boundary {
+                    padding: 40px;
+                    text-align: center;
+                    background: #f8f9fa;
+                    border-radius: var(--border-radius);
+                    margin: 20px 0;
+                }
+
+                .error-boundary h3 {
+                    color: #dc3545;
+                    margin-bottom: 15px;
+                }
+
+                .error-boundary p {
+                    color: #666;
+                    margin-bottom: 20px;
+                }
+
+                .error-boundary button {
+                    background: var(--primary-color);
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: var(--border-radius);
+                    cursor: pointer;
+                    transition: var(--transition);
+                }
+
+                .error-boundary button:hover {
+                    background: var(--secondary-color);
+                }
+            </style>
+        `;
+
+        // Inject additional styles
+        document.head.insertAdjacentHTML('beforeend', additionalStyles);
+
+        // Enhanced error handling
+        window.addEventListener('error', function(e) {
+            console.error('JavaScript error:', e.error);
+            // You could send this to an error reporting service
+        });
+
+        // Performance monitoring
+        window.addEventListener('load', function() {
+            const loadTime = performance.now();
+            console.log(`Page loaded in ${loadTime.toFixed(2)}ms`);
+            
+            // Report Core Web Vitals
+            if ('web-vital' in window) {
+                // This would integrate with a real performance monitoring service
+                console.log('Performance metrics available');
+            }
+        });
+
+        // Service Worker registration for offline support
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(function(registrationError) {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        // Enhanced accessibility features
+        document.addEventListener('keydown', function(e) {
+            // Skip to main content with Tab key
+            if (e.key === 'Tab' && !e.shiftKey && document.activeElement === document.body) {
+                const mainContent = document.querySelector('main') || document.querySelector('.about-hero');
+                if (mainContent) {
+                    mainContent.focus();
+                    e.preventDefault();
+                }
+            }
+
+            // Close mobile menu with Escape key
+            if (e.key === 'Escape') {
+                const mobileMenu = document.querySelector('.main-menu.active');
+                if (mobileMenu) {
+                    const toggle = document.querySelector('.mobile-menu-toggle.active');
+                    if (toggle) {
+                        toggle.click();
+                    }
+                }
+            }
+        });
+
+        // Enhanced form validation
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                const requiredFields = this.querySelectorAll('[required]');
+                let isValid = true;
+
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.classList.add('error');
+                        
+                        // Remove error class after user starts typing
+                        field.addEventListener('input', function() {
+                            this.classList.remove('error');
+                        }, { once: true });
+                    }
+                });
+
+                if (!isValid) {
+                    e.preventDefault();
+                    // Focus first invalid field
+                    const firstError = this.querySelector('.error');
+                    if (firstError) {
+                        firstError.focus();
+                    }
+                }
+            });
+        });
+
+        // Cookie consent (if needed)
+        function showCookieConsent() {
+            const consent = localStorage.getItem('cookieConsent');
+            if (!consent) {
+                // Show cookie consent banner
+                const banner = document.createElement('div');
+                banner.className = 'cookie-consent';
+                banner.innerHTML = `
+                    <div class="cookie-content">
+                        <p>Chúng tôi sử dụng cookie để cải thiện trải nghiệm của bạn. Bằng cách tiếp tục sử dụng trang web, bạn đồng ý với việc sử dụng cookie.</p>
+                        <button onclick="acceptCookies()" class="cookie-accept">Đồng ý</button>
+                    </div>
+                `;
+                document.body.appendChild(banner);
+            }
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'true');
+            const banner = document.querySelector('.cookie-consent');
+            if (banner) {
+                banner.remove();
+            }
+        }
+
+        // Initialize cookie consent
+        // showCookieConsent();
+
+        // Analytics tracking (placeholder)
+        function trackEvent(eventName, eventData) {
+            // This would integrate with Google Analytics, Facebook Pixel, etc.
+            console.log('Event tracked:', eventName, eventData);
+        }
+
+        // Track page view
+        trackEvent('page_view', {
+            page: 'about',
+            timestamp: new Date().toISOString()
+        });
+
+        // Track scroll depth
+        let maxScrollDepth = 0;
+        window.addEventListener('scroll', function() {
+            const scrollDepth = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+            if (scrollDepth > maxScrollDepth) {
+                maxScrollDepth = scrollDepth;
+                if (maxScrollDepth % 25 === 0) { // Track at 25%, 50%, 75%, 100%
+                    trackEvent('scroll_depth', { depth: maxScrollDepth });
+                }
+            }
+        });
+
+        // Track clicks on important elements
+        document.querySelectorAll('.hero-btn, .cta-btn, .member-social a').forEach(element => {
+            element.addEventListener('click', function() {
+                trackEvent('button_click', {
+                    element: this.textContent.trim() || this.getAttribute('aria-label') || 'button',
+                    href: this.href || null
+                });
+            });
+        });
+
+        // Error boundary component
+        class ErrorBoundary {
+            constructor(element) {
+                this.element = element;
+                this.init();
+            }
+
+            init() {
+                try {
+                    // Initialize component
+                    this.render();
+                } catch (error) {
+                    this.handleError(error);
+                }
+            }
+
+            render() {
+                // Component rendering logic
+            }
+
+            handleError(error) {
+                               console.error('Component error:', error);
+                this.element.innerHTML = `
+                    <div class="error-boundary">
+                        <h3>Đã xảy ra lỗi</h3>
+                        <p>Xin lỗi, có lỗi xảy ra khi tải nội dung này. Vui lòng thử lại sau.</p>
+                        <button onclick="window.location.reload()">Tải lại trang</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize error boundaries for critical components
+        document.querySelectorAll('[data-component]').forEach(element => {
+            new ErrorBoundary(element);
+        });
+
+        // Intersection Observer for performance optimization
+        const observerOptions = {
+            root: null,
+            rootMargin: '50px',
+            threshold: 0.1
+        };
+
+        const performanceObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Load component when it comes into view
+                    const element = entry.target;
+                    const componentType = element.dataset.component;
+                    
+                    switch (componentType) {
+                        case 'lazy-section':
+                            loadLazySection(element);
+                            break;
+                        case 'animation-trigger':
+                            triggerAnimation(element);
+                            break;
+                        default:
+                            break;
+                    }
+                    
+                    performanceObserver.unobserve(element);
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements with data-component attribute
+        document.querySelectorAll('[data-component]').forEach(element => {
+            performanceObserver.observe(element);
+        });
+
+        function loadLazySection(element) {
+            // Lazy load section content
+            element.classList.add('loaded');
+        }
+
+        function triggerAnimation(element) {
+            // Trigger custom animations
+            element.classList.add('animate');
+        }
+
+        // Enhanced mobile experience
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartY - touchEndY;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe up - could trigger scroll to next section
+                    trackEvent('swipe', { direction: 'up' });
+                } else {
+                    // Swipe down - could trigger scroll to previous section
+                    trackEvent('swipe', { direction: 'down' });
+                }
+            }
+        }
+
+        // Progressive Web App features
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent Chrome 67 and earlier from automatically showing the prompt
+            e.preventDefault();
+            // Stash the event so it can be triggered later
+            deferredPrompt = e;
+            
+            // Show install button
+            showInstallButton();
+        });
+
+        function showInstallButton() {
+            const installButton = document.createElement('button');
+            installButton.className = 'install-app-btn';
+            installButton.innerHTML = '<i class="fas fa-download"></i> Cài đặt ứng dụng';
+            installButton.style.cssText = `
+                position: fixed;
+                bottom: 80px;
+                right: 20px;
+                background: var(--gradient-primary);
+                color: white;
+                border: none;
+                padding: 12px 20px;
+                border-radius: 25px;
+                cursor: pointer;
+                font-weight: 600;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+                transition: var(--transition);
+            `;
+
+            installButton.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    
+                    if (outcome === 'accepted') {
+                        trackEvent('pwa_install', { result: 'accepted' });
+                    } else {
+                        trackEvent('pwa_install', { result: 'dismissed' });
+                    }
+                    
+                    deferredPrompt = null;
+                    installButton.remove();
+                }
+            });
+
+            document.body.appendChild(installButton);
+        }
+
+        // Network status monitoring
+        function updateNetworkStatus() {
+            const isOnline = navigator.onLine;
+            const statusIndicator = document.querySelector('.network-status') || createNetworkStatusIndicator();
+            
+            if (isOnline) {
+                statusIndicator.textContent = 'Đã kết nối';
+                statusIndicator.className = 'network-status online';
+            } else {
+                statusIndicator.textContent = 'Mất kết nối';
+                statusIndicator.className = 'network-status offline';
+            }
+        }
+
+        function createNetworkStatusIndicator() {
+            const indicator = document.createElement('div');
+            indicator.className = 'network-status';
+            indicator.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 8px 15px;
+                border-radius: 20px;
+                font-size: 12px;
+                font-weight: 600;
+                z-index: 10000;
+                transition: var(--transition);
+                opacity: 0;
+                transform: translateY(-20px);
+            `;
+            
+            document.body.appendChild(indicator);
+            return indicator;
+        }
+
+        // Add CSS for network status
+        const networkStatusStyles = `
+            <style>
+                .network-status.online {
+                    background: #28a745;
+                    color: white;
+                    opacity: 0;
+                }
+                
+                .network-status.offline {
+                    background: #dc3545;
+                    color: white;
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                
+                .install-app-btn:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+                }
+            </style>
+        `;
+
+        document.head.insertAdjacentHTML('beforeend', networkStatusStyles);
+
+        // Listen for network status changes
+        window.addEventListener('online', updateNetworkStatus);
+        window.addEventListener('offline', updateNetworkStatus);
+
+        // Initial network status check
+        updateNetworkStatus();
+
+        // Memory management
+        function cleanupResources() {
+            // Remove event listeners
+            window.removeEventListener('scroll', updateScrollEffects);
+            window.removeEventListener('resize', handleResize);
+            
+            // Clear intervals and timeouts
+            clearInterval(window.animationInterval);
+            clearTimeout(window.debounceTimeout);
+            
+            // Disconnect observers
+            if (counterObserver) counterObserver.disconnect();
+            if (imageObserver) imageObserver.disconnect();
+            if (performanceObserver) performanceObserver.disconnect();
+        }
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', cleanupResources);
+
+        // Resize handler
+        function handleResize() {
+            // Update layout calculations
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Initial call
+
+        // Keyboard navigation enhancement
+        document.addEventListener('keydown', function(e) {
+            // Navigate sections with arrow keys
+            if (e.altKey) {
+                const sections = document.querySelectorAll('section');
+                const currentSection = getCurrentSection();
+                const currentIndex = Array.from(sections).indexOf(currentSection);
+                
+                if (e.key === 'ArrowDown' && currentIndex < sections.length - 1) {
+                    sections[currentIndex + 1].scrollIntoView({ behavior: 'smooth' });
+                    e.preventDefault();
+                } else if (e.key === 'ArrowUp' && currentIndex > 0) {
+                    sections[currentIndex - 1].scrollIntoView({ behavior: 'smooth' });
+                    e.preventDefault();
+                }
+            }
+        });
+
+        function getCurrentSection() {
+            const sections = document.querySelectorAll('section');
+            const scrollPosition = window.scrollY + window.innerHeight / 2;
+            
+            for (let section of sections) {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+                    return section;
+                }
+            }
+            
+            return sections[0];
+        }
+
+        // Final initialization
+        console.log('✅ About page fully initialized with all enhancements');
+        
+        // Dispatch custom event when page is ready
+        document.dispatchEvent(new CustomEvent('aboutPageReady', {
+            detail: {
+                timestamp: new Date().toISOString(),
+                features: [
+                    'animations',
+                    'lazy-loading',
+                    'responsive-design',
+                    'accessibility',
+                    'performance-optimization',
+                    'pwa-support',
+                    'error-handling'
+                ]
+            }
+        }));
+    </script>
+</body>
+</html>

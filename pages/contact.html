@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên Hệ - Nguyên Sinh</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles specific to Contact page */
+        .contact-hero {
+            height: 60vh;
+            min-height: 400px;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/không gian 9.jpg') no-repeat center center;
+            background-size: cover;
+        }
+        
+        .contact-section {
+            padding: 80px 0;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            padding-right: 30px;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+        }
+        
+        .contact-info p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .contact-details {
+            margin-top: 40px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        .contact-text {
+            flex: 1;
+        }
+        
+        .contact-text h4 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .contact-text p {
+            margin-bottom: 0;
+            color: #666;
+        }
+        
+        .contact-social {
+            margin-top: 40px;
+        }
+        
+        .contact-social h4 {
+            margin-bottom: 15px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-icon.facebook {
+            background-color: #3b5998;
+        }
+        
+        .social-icon.instagram {
+            background-color: #e1306c;
+        }
+        
+        .social-icon.zalo {
+            background-color: #0068ff;
+        }
+        
+        .social-icon.google {
+            background-color: #db4437;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-form {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .contact-form h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.1);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .form-submit {
+            text-align: center;
+        }
+        
+        .map-container {
+            height: 400px;
+            margin-top: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .business-hours {
+            margin-top: 40px;
+        }
+        
+        .business-hours h4 {
+            margin-bottom: 15px;
+        }
+        
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .hours-table tr {
+            border-bottom: 1px solid #eee;
+        }
+        
+        .hours-table td {
+            padding: 10px 0;
+        }
+        
+        .hours-table td:first-child {
+            font-weight: 500;
+        }
+        
+        .hours-table td:last-child {
+            text-align: right;
+        }
+        
+        @media (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../img/hero.1280X1280 copy.PNG" alt="Nguyên Sinh Logo">
+                </a>
+            </div>
+            <nav>
+                <ul class="main-menu">
+                    <li><a href="../index.html">Trang Chủ</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="menu.html">Thực Đơn</a></li>
+                    <li><a href="order.html">Đặt Hàng</a></li>
+                    <li><a href="blog.html">Tin Tức</a></li>
+                    <li><a href="admin.html">Quản lý</a></li>
+                    <li><a href="locations.html">Cửa Hàng</a></li>
+                    <li><a href="account.html">Tài Khoản</a></li>
+                    <li><a href="cart.html">Giỏ hàng</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero contact-hero">
+        <div class="hero-content">
+            <h1>Liên Hệ</h1>
+            <h2>Chúng tôi luôn sẵn sàng lắng nghe bạn</h2>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Liên Hệ Với Chúng Tôi</h2>
+                <div class="divider"></div>
+                <p>Hãy liên hệ với chúng tôi nếu bạn có bất kỳ câu hỏi, góp ý hoặc yêu cầu nào</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Thông Tin Liên Hệ</h3>
+                    <p>Nguyên Sinh luôn sẵn sàng lắng nghe và phản hồi mọi thắc mắc, góp ý của quý khách. Hãy liên hệ với chúng tôi qua các kênh dưới đây:</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Địa Chỉ</h4>
+                                <p>141 Trần Đình Xu, Phường Nguyễn Cư Trinh, Quận 1, TP.HCM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Điện Thoại</h4>
+                                <p>Hotline: 08.1942.1942</p>
+                                <p>Zalo: 0988.57.57.54</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>info@nguyensinh.com</p>
+                                <p>cskh@nguyensinh.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="business-hours">
+                        <h4>Giờ Làm Việc</h4>
+                        <table class="hours-table">
+                            <tr>
+                                <td>Thứ Hai - Thứ Sáu</td>
+                                <td>06:00 - 22:00</td>
+                            </tr>
+                            <tr>
+                                <td>Thứ Bảy - Chủ Nhật</td>
+                                <td>06:00 - 23:00</td>
+                            </tr>
+                            <tr>
+                                <td>Ngày Lễ</td>
+                                <td>07:00 - 22:00</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="contact-social">
+                        <h4>Kết Nối Với Chúng Tôi</h4>
+                        <div class="social-icons">
+                            <a href="https://www.facebook.com/NguyenSinhHaNoi" target="_blank" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/nguyensinh.bistro/" target="_blank" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://zalo.me/s/3478851884659907934/" target="_blank" class="social-icon zalo"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://g.page/r/Ceim_ECSeT-9EBM/review" target="_blank" class="social-icon google"><i class="fab fa-google"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Gửi Tin Nhắn</h3>
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="name">Họ tên</label>
+                                <input type="text" class="form-control" id="name" placeholder="Nhập họ tên của bạn" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="email">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Nhập email của bạn" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="phone">Số điện thoại</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="Nhập số điện thoại của bạn">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="subject">Tiêu đề</label>
+                            <input type="text" class="form-control" id="subject" placeholder="Nhập tiêu đề tin nhắn" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="message">Nội dung</label>
+                            <textarea class="form-control" id="message" placeholder="Nhập nội dung tin nhắn của bạn" required></textarea>
+                        </div>
+                        <div class="form-submit">
+                            <button type="submit" class="btn btn-primary">Gửi Tin Nhắn</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Map -->
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.5177580567147!2d106.68764911471867!3d10.771412992324364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f3c586421ef%3A0xb606461945bd9b8d!2zMTQxIFRy4bqnbiDEkMOsbmggWHUsIFBoxrDhu51uZyBOZ3V54buFbiBDxrAgVHJpbmgsIFF14bqtbiAxLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1650123456789!5m2!1svi!2s" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="../img/hero.1280X1280 copy.PNG" alt="Nguyên Sinh Logo">
+                    <p>Nguyên bản gia truyền - 3 đời một vị</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Liên Kết Nhanh</h3>
+                    <ul>
+                        <li><a href="../index.html">Trang Chủ</a></li>
+                        <li><a href="about.html">Giới Thiệu</a></li>
+                        <li><a href="menu.html">Thực Đơn</a></li>
+                        <li><a href="order.html">Đặt Hàng</a></li>
+                        <li><a href="blog.html">Tin Tức</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Thông Tin Liên Hệ</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 141 Trần Đình Xu, Quận 1, TP.HCM</p>
+                    <p><i class="fas fa-phone"></i> Hotline: 08.1942.1942</p>
+                    <p><i class="fab fa-whatsapp"></i> Zalo: 0988.57.57.54</p>
+                    <p><i class="fas fa-envelope"></i> info@nguyensinh.com</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Kết Nối Với Chúng Tôi</h3>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/NguyenSinhHaNoi" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/nguyensinh.bistro/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://zalo.me/s/3478851884659907934/" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://g.page/r/Ceim_ECSeT-9EBM/review" target="_blank"><i class="fab fa-google"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nguyên Sinh. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                // Here you would typically send the form data to the server
+                // For demo purposes, we'll just show an alert
+                alert(`Cảm ơn ${name} đã liên hệ với chúng tôi. Chúng tôi sẽ phản hồi qua email ${email} trong thời gian sớm nhất.`);
+                
+                // Reset form
+                contactForm.reset();
+            });
+        });
+    </script>
+</body>
+</html>

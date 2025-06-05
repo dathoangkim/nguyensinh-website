@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bánh Mì Việt Nam - Di Sản Ẩm Thực - Nguyên Sinh</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles specific to Blog Detail page */
+        .blog-detail-hero {
+            height: 60vh;
+            min-height: 400px;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/_12A7780.jpg') no-repeat center center;
+            background-size: cover;
+        }
+        
+        .blog-detail-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+        
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .blog-category {
+            display: inline-block;
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 15px;
+        }
+        
+        .blog-date {
+            color: #666;
+            margin-right: 15px;
+        }
+        
+        .blog-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+        }
+        
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-name {
+            font-weight: 500;
+        }
+        
+        .blog-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            line-height: 1.3;
+        }
+        
+        .blog-featured-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .blog-content {
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        
+        .blog-content p {
+            margin-bottom: 20px;
+        }
+        
+        .blog-content h2 {
+            font-size: 1.8rem;
+            margin: 40px 0 20px;
+            color: var(--primary-color);
+        }
+        
+        .blog-content h3 {
+            font-size: 1.5rem;
+            margin: 30px 0 15px;
+        }
+        
+        .blog-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .blog-content blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            color: #555;
+        }
+        
+        .blog-tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .blog-tag {
+            background-color: #f5f5f5;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            color: #666;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .blog-tag:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+        
+        .blog-share {
+            display: flex;
+            align-items: center;
+            margin-bottom: 50px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+        }
+        
+        .share-label {
+            margin-right: 15px;
+            font-weight: 500;
+        }
+        
+        .share-buttons {
+            display: flex;
+        }
+        
+        .share-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .share-button.facebook {
+            background-color: #3b5998;
+        }
+        
+        .share-button.twitter {
+            background-color: #1da1f2;
+        }
+        
+        .share-button.pinterest {
+            background-color: #bd081c;
+        }
+        
+        .share-button.linkedin {
+            background-color: #0077b5;
+        }
+        
+        .share-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .related-posts {
+            margin-top: 60px;
+        }
+        
+        .related-posts-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .related-posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .comments-section {
+            margin-top: 60px;
+        }
+        
+        .comments-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+        
+        .comment {
+            display: flex;
+            margin-bottom: 30px;
+        }
+        
+        .comment-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .comment-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .comment-content {
+            flex-grow: 1;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: 500;
+        }
+        
+        .comment-date {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .comment-text {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .comment-reply {
+            color: var(--primary-color);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .comment-reply:hover {
+            color: var(--secondary-color);
+        }
+        
+        .comment-form {
+            margin-top: 40px;
+        }
+        
+        .comment-form-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .blog-title {
+                font-size: 2rem;
+            }
+            
+            .blog-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .blog-meta > * {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../img/hero.1280X1280 copy.PNG" alt="Nguyên Sinh Logo">
+                </a>
+            </div>
+            <nav>
+                <ul class="main-menu">
+                    <li><a href="../index.html">Trang Chủ</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="menu.html">Thực Đơn</a></li>
+                    <li><a href="order.html">Đặt Hàng</a></li>
+                    <li><a href="blog.html" class="active">Tin Tức</a></li>
+                    <li><a href="admin.html">Quản lý</a></li>
+                    <li><a href="locations.html">Cửa Hàng</a></li>
+                    <li><a href="account.html">Tài Khoản</a></li>
+                    <li><a href="cart.html">Giỏ hàng</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero blog-detail-hero">
+        <div class="hero-content">
+            <h1>Bánh Mì Việt Nam</h1>
+            <h2>Di Sản Ẩm Thực Được UNESCO Vinh Danh</h2>
+        </div>
+    </section>
+
+    <!-- Blog Detail Section -->
+    <section class="blog-detail-section">
+        <div class="blog-detail-container">
+            <div class="blog-meta">
+                <span class="blog-category">Văn Hóa</span>
+                <span class="blog-date"><i class="far fa-calendar-alt"></i> 15 Tháng 4, 2024</span>
+                <div class="blog-author">
+                    <div class="author-avatar">
+                        <img src="../img/chef.jpg" alt="Nguyễn Văn A">
+                    </div>
+                    <span class="author-name">Nguyễn Văn A</span>
+                </div>
+            </div>
+            
+            <h1 class="blog-title">Bánh Mì Việt Nam - Di Sản Ẩm Thực Được UNESCO Vinh Danh</h1>
+            
+            <img src="../img/_12A7780.jpg" alt="Bánh Mì Việt Nam" class="blog-featured-image">
+            
+            <div class="blog-content">
+                <p>Bánh mì Việt Nam vừa được UNESCO công nhận là một trong những di sản ẩm thực đặc sắc của thế giới. Đây là một dấu mốc quan trọng, khẳng định vị thế của món ăn đường phố Việt Nam trên bản đồ ẩm thực toàn cầu.</p>
+                
+                <h2>Lịch sử hình thành bánh mì Việt Nam</h2>
+                
+                <p>Bánh mì Việt Nam có nguồn gốc từ thời Pháp thuộc, khi người Pháp mang bánh mì (baguette) vào Việt Nam vào cuối thế kỷ 19. Ban đầu, bánh mì là món ăn xa xỉ, chỉ dành cho người Pháp và tầng lớp thượng lưu Việt Nam.</p>
+                
+                <p>Tuy nhiên, theo thời gian, người Việt đã biến tấu món ăn này, tạo ra phiên bản riêng với vỏ bánh mỏng, giòn hơn và nhân bánh đậm đà hương vị Việt Nam. Đặc biệt, sau khi người Pháp rời đi, bánh mì đã trở thành món ăn bình dân, phổ biến khắp các ngõ ngách Việt Nam.</p>
+                
+                <blockquote>
+                    "Bánh mì Việt Nam là minh chứng cho sự giao thoa văn hóa ẩm thực, là sự kết hợp hoàn hảo giữa Đông và Tây, tạo nên một hương vị độc đáo không thể tìm thấy ở bất kỳ đâu trên thế giới." - Anthony Bourdain, đầu bếp và nhà văn nổi tiếng người Mỹ.
+                </blockquote>
+                
+                <h2>Đặc trưng của bánh mì Việt Nam</h2>
+                
+                <p>Điều làm nên sự khác biệt của bánh mì Việt Nam so với các loại sandwich khác trên thế giới chính là sự kết hợp hài hòa giữa:</p>
+                
+                <ul>
+                    <li><strong>Vỏ bánh:</strong> Giòn bên ngoài, mềm bên trong, nhẹ hơn so với baguette truyền thống của Pháp.</li>
+                    <li><strong>Nhân bánh:</strong> Đa dạng với pate, thịt nguội, chả lụa, rau thơm, dưa chua, ớt tươi và nước sốt đặc biệt.</li>
+                    <li><strong>Hương vị:</strong> Cân bằng giữa vị béo, chua, mặn, ngọt và cay, tạo nên một bản hòa tấu trọn vẹn.</li>
+                </ul>
+                
+                <p>Mỗi vùng miền Việt Nam lại có cách chế biến bánh mì riêng, tạo nên sự đa dạng phong phú. Bánh mì Sài Gòn nổi tiếng với nhân thịt nguội và pate, bánh mì Hà Nội đặc trưng với pate và chả, bánh mì Đà Nẵng lại nổi bật với nhân cá mòi và trứng ốp la.</p>
+                
+                <h2>Hành trình trở thành di sản thế giới</h2>
+                
+                <p>Quá trình để bánh mì Việt Nam được UNESCO công nhận là một hành trình dài, đòi hỏi sự nỗ lực của nhiều cá nhân, tổ chức và sự ủng hộ của cộng đồng.</p>
+                
+                <p>Năm 2020, Bộ Văn hóa, Thể thao và Du lịch Việt Nam đã bắt đầu quá trình chuẩn bị hồ sơ đề cử bánh mì Việt Nam là di sản văn hóa phi vật thể của nhân loại. Sau nhiều năm nghiên cứu, thu thập tài liệu và vận động, hồ sơ đã được UNESCO xem xét và chính thức công nhận vào tháng 4 năm 2024.</p>
+                
+                <p>Việc được công nhận không chỉ là niềm tự hào của người Việt Nam mà còn mở ra cơ hội quảng bá văn hóa ẩm thực Việt Nam ra thế giới, đồng thời thúc đẩy ngành du lịch ẩm thực phát triển.</p>
+                
+                <h2>Bánh mì Nguyên Sinh - Giữ gìn hương vị truyền thống</h2>
+                
+                <p>Trong bối cảnh bánh mì Việt Nam ngày càng được quốc tế công nhận, Nguyên Sinh tự hào là một trong những thương hiệu bánh mì thịt nguội lâu đời nhất Việt Nam, với lịch sử hơn 80 năm.</p>
+                
+                <p>Từ năm 1942, Nguyên Sinh đã bắt đầu hành trình giữ gìn và phát triển công thức bánh mì thịt nguội truyền thống. Qua ba thế hệ, công thức gia truyền vẫn được giữ nguyên bản, mang đến cho thực khách hương vị đích thực của bánh mì Việt Nam.</p>
+                
+                <p>Với sự kiện bánh mì Việt Nam được UNESCO vinh danh, Nguyên Sinh càng thêm trách nhiệm trong việc bảo tồn và phát huy giá trị văn hóa ẩm thực này, đồng thời tiếp tục đổi mới để đáp ứng nhu cầu ngày càng cao của khách hàng trong và ngoài nước.</p>
+                
+                <h2>Kết luận</h2>
+                
+                <p>Bánh mì Việt Nam từ một món ăn bình dân đã vươn mình trở thành biểu tượng văn hóa, được thế giới công nhận. Đây không chỉ là niềm tự hào của người Việt Nam mà còn là minh chứng cho sự sáng tạo, tinh tế trong ẩm thực Việt.</p>
+                
+                <p>Nguyên Sinh tự hào được đồng hành cùng hành trình phát triển của bánh mì Việt Nam và cam kết tiếp tục giữ gìn, phát huy giá trị văn hóa ẩm thực độc đáo này.</p>
+            </div>
+            
+            <div class="blog-tags">
+                <a href="#" class="blog-tag">Bánh mì</a>
+                <a href="#" class="blog-tag">UNESCO</a>
+                <a href="#" class="blog-tag">Di sản ẩm thực</a>
+                <a href="#" class="blog-tag">Văn hóa Việt Nam</a>
+                <a href="#" class="blog-tag">Ẩm thực đường phố</a>
+            </div>
+            
+            <div class="blog-share">
+                <span class="share-label">Chia sẻ bài viết:</span>
+                <div class="share-buttons">
+                    <a href="#" class="share-button facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="share-button twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="share-button pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#" class="share-button linkedin"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <!-- Related Posts -->
+            <div class="related-posts">
+                <h2 class="related-posts-title">Bài Viết Liên Quan</h2>
+                <div class="related-posts-grid">
+                    <!-- Related Post 1 -->
+                    <div class="blog-post">
+                        <div class="post-image">
+                            <img src="../img/_12A7784.jpg" alt="Lịch Sử Bánh Mì Việt Nam">
+                        </div>
+                        <div class="post-content">
+                            <span class="post-category">Lịch Sử</span>
+                            <h3 class="post-title">Lịch Sử Bánh Mì Việt Nam: Từ Thực Dân Đến Bản Sắc Dân Tộc</h3>
+                            <div class="post-meta">
+                                <span class="post-date">10 Tháng 4, 2024</span>
+                                <a href="blog-detail.html?id=2" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Related Post 2 -->
+                    <div class="blog-post">
+                        <div class="post-image">
+                            <img src="../img/không gian 9.jpg" alt="Văn Hóa Ẩm Thực Đường Phố">
+                        </div>
+                        <div class="post-content">
+                            <span class="post-category">Văn Hóa</span>
+                            <h3 class="post-title">Văn Hóa Ẩm Thực Đường Phố Việt Nam Qua Góc Nhìn Quốc Tế</h3>
+                            <div class="post-meta">
+                                <span class="post-date">25 Tháng 3, 2024</span>
+                                <a href="blog-detail.html?id=5" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Related Post 3 -->
+                    <div class="blog-post">
+                        <div class="post-image">
+                            <img src="../img/_12A7786.jpg" alt="Bí Quyết Làm Pate Gan">
+                        </div>
+                        <div class="post-content">
+                            <span class="post-category">Công Thức</span>
+                            <h3 class="post-title">Bí Quyết Làm Pate Gan Thơm Ngon Đúng Điệu</h3>
+                            <div class="post-meta">
+                                <span class="post-date">5 Tháng 4, 2024</span>
+                                <a href="blog-detail.html?id=3" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Comments Section -->
+            <div class="comments-section">
+                <h2 class="comments-title">Bình Luận (3)</h2>
+                
+                <!-- Comment 1 -->
+                <div class="comment">
+                    <div class="comment-avatar">
+                        <img src="../img/chef.jpg" alt="Trần Văn B">
+                    </div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <span class="comment-author">Trần Văn B</span>
+                            <span class="comment-date">15 Tháng 4, 2024</span>
+                        </div>
+                        <p class="comment-text">Bài viết rất hay và đầy đủ thông tin về bánh mì Việt Nam. Tôi rất tự hào khi món ăn dân dã của Việt Nam được UNESCO công nhận. Hy vọng sẽ có thêm nhiều món ăn Việt Nam khác được vinh danh trong tương lai.</p>
+                        <span class="comment-reply">Trả lời</span>
+                    </div>
+                </div>
+                
+                <!-- Comment 2 -->
+                <div class="comment">
+                    <div class="comment-avatar">
+                        <img src="../img/chef.jpg" alt="Nguyễn Thị C">
+                    </div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <span class="comment-author">Nguyễn Thị C</span>
+                            <span class="comment-date">14 Tháng 4, 2024</span>
+                        </div>
+                        <p class="comment-text">Tôi đã thử bánh mì Nguyên Sinh và phải nói rằng đây là một trong những bánh mì ngon nhất mà tôi từng ăn. Pate thơm, thịt nguội đậm đà, bánh giòn rụm. Thật xứng đáng với danh hiệu di sản ẩm thực!</p>
+                        <span class="comment-reply">Trả lời</span>
+                    </div>
+                </div>
+                
+                <!-- Comment 3 -->
+                <div class="comment">
+                    <div class="comment-avatar">
+                        <img src="../img/chef.jpg" alt="Lê Văn D">
+                    </div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <span class="comment-author">Lê Văn D</span>
+                            <span class="comment-date">13 Tháng 4, 2024</span>
+                        </div>
+                        <p class="comment-text">Cảm ơn Nguyên Sinh đã giữ gìn hương vị truyền thống của bánh mì Việt Nam. Trong thời đại hiện nay, việc bảo tồn các giá trị văn hóa ẩm thực là rất quan trọng. Mong rằng Nguyên Sinh sẽ tiếp tục phát triển và quảng bá bánh mì Việt Nam ra thế giới.</p>
+                        <span class="comment-reply">Trả lời</span>
+                    </div>
+                </div>
+                
+                <!-- Comment Form -->
+                <div class="comment-form">
+                    <h3 class="comment-form-title">Để Lại Bình Luận</h3>
+                    <form>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Nhập bình luận của bạn" required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Họ tên" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Website (không bắt buộc)">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Gửi Bình Luận</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Trải Nghiệm Hương Vị Gia Truyền</h2>
+                <p>Đặt hàng ngay hôm nay để thưởng thức hương vị bánh mì thịt nguội đích thực</p>
+                <div class="cta-buttons">
+                    <a href="order.html" class="btn btn-primary">Đặt Hàng Online</a>
+                    <a href="tel:0819421942" class="btn btn-secondary">Gọi Ngay: 08.1942.1942</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="../img/hero.1280X1280 copy.PNG" alt="Nguyên Sinh Logo">
+                    <p>Nguyên bản gia truyền - 3 đời một vị</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Liên Kết Nhanh</h3>
+                    <ul>
+                        <li><a href="../index.html">Trang Chủ</a></li>
+                        <li><a href="about.html">Giới Thiệu</a></li>
+                        <li><a href="menu.html">Thực Đơn</a></li>
+                        <li><a href="order.html">Đặt Hàng</a></li>
+                        <li><a href="blog.html">Tin Tức</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Thông Tin Liên Hệ</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 141 Trần Đình Xu, Quận 1, TP.HCM</p>
+                    <p><i class="fas fa-phone"></i> Hotline: 08.1942.1942</p>
+                    <p><i class="fab fa-whatsapp"></i> Zalo: 0988.57.57.54</p>
+                    <p><i class="fas fa-envelope"></i> info@nguyensinh.com</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Kết Nối Với Chúng Tôi</h3>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/NguyenSinhHaNoi" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/nguyensinh.bistro/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://zalo.me/s/3478851884659907934/" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://g.page/r/Ceim_ECSeT-9EBM/review" target="_blank"><i class="fab fa-google"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nguyên Sinh. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/blog.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get blog post ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+            
+            // Here you would typically fetch the blog post data based on the ID
+            // For demo purposes, we're using static content
+            
+            // Comment reply functionality
+            const replyButtons = document.querySelectorAll('.comment-reply');
+            
+            replyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const commentAuthor = this.parentElement.querySelector('.comment-author').textContent;
+                    const commentForm = document.querySelector('.comment-form textarea');
+                    
+                    commentForm.value = `@${commentAuthor}: `;
+                    commentForm.focus();
+                    
+                    // Scroll to comment form
+                    document.querySelector('.comment-form').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

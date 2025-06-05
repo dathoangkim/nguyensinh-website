@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Đăng nhập hoặc đăng ký tài khoản Nguyên Sinh để quản lý đơn hàng, thông tin cá nhân và nhận ưu đãi đặc biệt">
+    <title>Tài Khoản - Nguyên Sinh Bánh Mì Gia Truyền</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../img/favicon.png">
+    <style>
+        /* Account Page Specific Styles */
+        .account-section {
+            padding: 6rem 0;
+            background-color: var(--primary-color);
+            min-height: calc(100vh - 400px);
+        }
+
+        .account-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .account-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .account-header h1 {
+            font-size: 2.8rem;
+            color: var(--light-brown);
+            margin-bottom: 1rem;
+        }
+
+        .account-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 0.8rem 2rem;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+            border-radius: 4px;
+        }
+
+        .tab-btn.active {
+            color: var(--secondary-color);
+        }
+
+        .tab-btn:after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .tab-btn.active:after {
+            width: 100%;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .auth-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--primary-color-light);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+        
+        .form-group:focus-within label {
+            color: var(--secondary-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.9rem 1.25rem;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            font-family: 'Roboto', sans-serif;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            height: 48px;
+            box-sizing: border-box;
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 300;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
+            background-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .form-control:disabled {
+            background-color: rgba(255, 255, 255, 0.04);
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        /* Input group for password fields */
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-group .form-control {
+            padding-right: 3rem;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            opacity: 0.6;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toggle-password:hover {
+            opacity: 1;
+            color: var(--secondary-color);
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-gold);
+            color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .form-footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 2rem 0;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 0 1rem;
+        }
+
+        .social-login {
+            margin: 2.5rem auto 0;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .social-login p {
+            margin: 0 0 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            position: relative;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-login p::before,
+        .social-login p::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.15);
+            margin: 0 10px;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.25s ease;
+            border: none;
+            min-width: 140px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+            opacity: 0.95;
+        }
+
+        .social-btn:active {
+            transform: translateY(0);
+        }
+
+        .social-btn i {
+            margin-right: 0.6rem;
+            font-size: 1.2rem;
+        }
+
+        .btn-google {
+            background: linear-gradient(135deg, #DB4437, #D44638);
+        }
+
+        .btn-google:hover {
+            background: linear-gradient(135deg, #D44638, #C33D2F);
+        }
+
+        .btn-facebook {
+            background: linear-gradient(135deg, #4267B2, #3B5998);
+        }
+        
+        .btn-facebook:hover {
+            background: linear-gradient(135deg, #3B5998, #344E86);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .social-buttons {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .social-btn {
+                width: 100%;
+                padding: 0.8rem;
+            }
+            
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        .btn-social:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Profile Section */
+        .profile-section {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--primary-color-light);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .profile-header {
+            background: var(--gradient-dark);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--secondary-color);
+            margin: 0 auto 1rem;
+            overflow: hidden;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-name {
+            font-size: 1.8rem;
+            margin: 0.5rem 0;
+            color: var(--light-brown);
+        }
+
+        .profile-email {
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .profile-badge {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .profile-body {
+            padding: 2rem;
+        }
+
+        .profile-section-title {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-brown);
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .profile-section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-gold);
+        }
+
+        .profile-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 1.2rem;
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--secondary-color);
+        }
+
+        .info-label {
+            font-size: 0.9rem;
+            color: var(--light-brown);
+            margin-bottom: 0.3rem;
+            opacity: 0.8;
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-edit {
+            background: var(--gradient-gold);
+            color: var(--primary-color);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-logout {
+            background: transparent;
+            color: #ff6b6b;
+            border: 1px solid #ff6b6b;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-edit:hover, .btn-logout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .account-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .auth-form {
+                padding: 1.5rem;
+            }
+            
+            .profile-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-actions {
+                flex-direction: column;
+            }
+            
+            .profile-actions button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+ 
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../img/hero.1280X1280 copy.PNG" alt="Nguyên Sinh Logo">
+                </a>
+            </div>
+            <nav>
+                <ul class="main-menu">
+                    <li><a href="../index.html">Trang Chủ</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="menu.html">Thực Đơn</a></li>
+                    <li class="has-dropdown">
+                        <a href="#">Đặt Hàng</a>
+                        <ul class="dropdown">
+                            <li><a href="checkout.html">Thanh Toán</a></li>
+                            <li><a href="datban.html">Đặt Bàn</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="blog.html">Tin Tức</a></li>
+                    <li><a href="locations.html">Cửa Hàng</a></li>
+                    <li><a href="account.html" class="active">Tài Khoản</a></li>
+                </ul>
+                <div class="mobile-menu-toggle"></div>
+            </nav>
+            <div class="header-actions">
+                <button class="header-action-btn search-toggle">
+                    <i class="fas fa-search"></i>
+                </button>
+                <a href="wishlist.html" class="header-action-btn">
+                    <i class="fas fa-heart"></i>
+                </a>
+                <a href="cart.html" class="header-action-btn">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="account-section">
+        <div class="account-container">
+            <!-- Login/Register Tabs -->
+            <div class="auth-forms">
+                <div class="account-header">
+                    <h1>Chào mừng trở lại</h1>
+                    <p>Đăng nhập hoặc tạo tài khoản để tiếp tục</p>
+                </div>
+                
+                <div class="account-tabs">
+                    <button class="tab-btn active" data-tab="login">Đăng Nhập</button>
+                    <button class="tab-btn" data-tab="register">Đăng Ký</button>
+                </div>
+                
+                <!-- Login Form -->
+                <div id="login" class="tab-content active">
+                    <form id="loginForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Mật khẩu</label>
+                            <div class="input-group">
+                                <input type="password" id="login-password" class="form-control" placeholder="Nhập mật khẩu" required>
+                                <button type="button" class="toggle-password" aria-label="Hiển thị mật khẩu">
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="text-right mt-1">
+                                <a href="#" class="forgot-password" style="font-size: 0.9rem;">Quên mật khẩu?</a>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fas fa-sign-in-alt"></i> Đăng Nhập
+                        </button>
+                        <div class="form-footer">
+                            Chưa có tài khoản? <a href="#" class="switch-tab" data-tab="register">Đăng ký ngay</a>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Register Form -->
+                <div id="register" class="tab-content">
+                    <form id="registerForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="register-name">Họ và tên</label>
+                            <input type="text" id="register-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-phone">Số điện thoại</label>
+                            <input type="tel" id="register-phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Mật khẩu</label>
+                            <div class="input-group">
+                                <input type="password" id="register-password" class="form-control" placeholder="Tạo mật khẩu mạnh" required>
+                                <button type="button" class="toggle-password" aria-label="Hiển thị mật khẩu">
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="password-strength mt-1" style="font-size: 0.8rem; color: #aaa;">
+                                <span class="strength-text">Độ mạnh mật khẩu: </span>
+                                <span class="strength-indicator" style="color: #e74c3c;">Yếu</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-confirm-password">Xác nhận mật khẩu</label>
+                            <div class="input-group">
+                                <input type="password" id="register-confirm-password" class="form-control" placeholder="Nhập lại mật khẩu" required>
+                                <button type="button" class="toggle-password" aria-label="Hiển thị mật khẩu">
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="password-match mt-1" style="font-size: 0.8rem; display: none;">
+                                <i class="fas fa-check-circle" style="color: #2ecc71;"></i>
+                                <span>Mật khẩu khớp</span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fas fa-user-plus"></i> Đăng Ký
+                        </button>
+                        <div class="form-footer">
+                            Đã có tài khoản? <a href="#" class="switch-tab" data-tab="login">Đăng nhập ngay</a>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Social Login -->
+                <div class="social-login">
+                    <div class="divider">Hoặc đăng nhập với</div>
+                    <a href="#" class="btn-social btn-google">
+                        <i class="fab fa-google"></i> Tiếp tục với Google
+                    </a>
+                    <a href="#" class="btn-social btn-facebook">
+                        <i class="fab fa-facebook-f"></i> Tiếp tục với Facebook
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Profile Section (Hidden by default) -->
+            <div class="profile-section" id="profileSection">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <img src="../img/hero.1280X1280 copy.PNG" alt="User Avatar" id="userAvatar">
+                    </div>
+                    <h2 class="profile-name" id="userName">Nguyễn Văn A</h2>
+                    <p class="profile-email" id="userEmail">user@example.com</p>
+                    <span class="profile-badge">Thành viên Bạc</span>
+                </div>
+                <div class="profile-body">
+                    <h3 class="profile-section-title">Thông Tin Cá Nhân</h3>
+                    <div class="profile-info">
+                        <div class="info-item">
+                            <div class="info-label">Họ và tên</div>
+                            <div class="info-value" id="profileName">Nguyễn Văn A</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Email</div>
+                            <div class="info-value" id="profileEmail">user@example.com</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Số điện thoại</div>
+                            <div class="info-value" id="profilePhone">0909123456</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Ngày tham gia</div>
+                            <div class="info-value" id="joinDate">15/03/2023</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Điểm tích lũy</div>
+                            <div class="info-value" id="loyaltyPoints">1,250 điểm</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Đơn hàng gần đây</div>
+                            <div class="info-value">5 đơn hàng</div>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-actions">
+                        <button class="btn-edit" id="editProfileBtn">
+                            <i class="fas fa-edit"></i> Chỉnh sửa thông tin
+                        </button>
+                        <button class="btn-logout" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="../img/hero.1280X1280 copy.PNG" alt="Nguyên Sinh Logo">
+                    <p>Nguyên bản gia truyền - 3 đời một vị</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Liên Kết Nhanh</h3>
+                    <ul>
+                        <li><a href="../index.html">Trang Chủ</a></li>
+                        <li><a href="about.html">Về Chúng Tôi</a></li>
+                        <li><a href="menu.html">Thực Đơn</a></li>
+                        <li><a href="blog.html">Tin Tức</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Liên Hệ</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Đường Số 1, Quận 1, TP.HCM</p>
+                    <p><i class="fas fa-phone"></i> 08.1942.1942</p>
+                    <p><i class="fas fa-envelope"></i> info@nguyensinh.vn</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-newsletter">
+                    <h3>Đăng Ký Nhận Tin</h3>
+                    <p>Đăng ký để nhận ưu đãi và thông tin mới nhất từ Nguyên Sinh</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Email của bạn" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Nguyên Sinh. Bảo lưu mọi quyền.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-apple-pay"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../js/account.js"></script>
+</body>
+</html>

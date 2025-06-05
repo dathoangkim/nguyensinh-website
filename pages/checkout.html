@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh Toán - Nguyên Sinh</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Bổ sung style riêng cho trang checkout */
+        .checkout-container {
+            max-width: 1000px;
+            margin: 120px auto 50px;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            color: var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .checkout-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/img/pattern-light.png') repeat;
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .checkout-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .checkout-section {
+            margin-bottom: 2.5rem;
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .checkout-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        /* Product details styles */
+        .product-details {
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: #fafafa;
+        }
+    
+        .order-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+            background: #fff;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .order-item:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transform: translateY(-1px);
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .order-item-details {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-left: 15px;
+            gap: 15px;
+        }
+
+        .order-item-info {
+            flex: 1;
+        }
+
+        .order-item-price-qty {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+        }
+
+        .order-item-name {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .order-item-variant {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .order-item-price {
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+
+        .order-item-quantity {
+            background-color: #f0f0f0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .order-summary {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px dashed #eee;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+
+        .summary-row.total {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #eee;
+        }
+
+        .summary-label {
+            color: #666;
+        }
+
+        .summary-value {
+            font-weight: 500;
+        }
+
+        .summary-value.discount {
+            color: #2ecc71;
+        }
+
+        .summary-value.shipping {
+            color: #e67e22;
+        }
+
+        /* Loading state */
+        .loading-spinner {
+            text-align: center;
+            padding: 20px;
+            color: var(--primary-color);
+        }
+
+        .loading-spinner i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .order-item {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 10px 0;
+            }
+
+            .order-item-image {
+                width: 60px;
+                height: 60px;
+                margin-right: 10px;
+                flex-shrink: 0;
+            }
+
+            .order-item-details {
+                flex: 1;
+                text-align: left;
+                min-width: 0; /* Cho phép text overflow ellipsis hoạt động */
+            }
+
+            .order-item-name {
+                font-size: 1rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .order-item-variant {
+                font-size: 0.85rem;
+            }
+
+            .order-item-price {
+                font-size: 0.9rem;
+            }
+
+            .order-item-quantity {
+                font-size: 0.85rem;
+                padding: 2px 6px;
+            }
+
+            .summary-row {
+                font-size: 0.9rem;
+            }
+
+            .summary-row.total {
+                font-size: 1.1rem;
+            }
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-top: 10px;
+            background-color: #fff;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        select:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(224, 181, 115, 0.2);
+            outline: none;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 1.2rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-checkout:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-checkout:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .breadcrumb {
+            margin-bottom: 20px;
+        }
+
+        .checkout-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .checkout-steps::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #eee;
+            z-index: 1;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #666;
+        }
+
+        .step.active .step-number {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .step.active .step-label {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        /* Form styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="tel"],
+        .form-group input[type="email"],
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: var(--primary-color);
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="tel"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group select:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(224, 181, 115, 0.2);
+            outline: none;
+        }
+
+        .error-messages {
+            background-color: #fff3f3;
+            border: 1px solid #ffcdd2;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #d32f2f;
+        }
+
+        .error-messages ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .error-messages li {
+            margin-bottom: 5px;
+        }
+
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-top: 20px;
+            border-top: 2px solid #eee;
+            font-size: 1.2rem;
+        }
+
+        .order-total h4 {
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .order-total span {
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 1.4rem;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification-success {
+            border-left: 4px solid #4caf50;
+        }
+
+        .notification-error {
+            border-left: 4px solid #f44336;
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+        /* Radio button styles */
+        .form-group input[type="radio"] {
+            margin-right: 10px;
+            accent-color: var(--secondary-color);
+        }
+
+        .form-group input[type="radio"] + label {
+            display: inline;
+            cursor: pointer;
+        }
+
+        /* Bank details styles */
+        #bankDetails {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        #bankDetails p {
+            margin: 5px 0;
+            color: var(--primary-color);
+        }
+
+        /* Discount code section */
+        #discountCode {
+            width: calc(100% - 120px);
+            margin-right: 10px;
+        }
+
+        #applyDiscount {
+            width: 110px;
+            padding: 12px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #applyDiscount:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        #discountResult {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        /* Error state */
+        .form-group input:invalid,
+        .form-group select:invalid {
+            border-color: #ff6b6b;
+        }
+
+        /* Success state */
+        .form-group input:valid:not(:placeholder-shown),
+        .form-group select:valid:not([value=""]) {
+            border-color: #51cf66;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-container {
+                padding: 20px;
+                margin: 100px 15px 30px;
+            }
+
+            .checkout-section {
+                padding: 15px;
+            }
+
+            .checkout-title {
+                font-size: 1.5rem;
+            }
+
+            .checkout-section h3 {
+                font-size: 1.2rem;
+            }
+
+            .step-label {
+                font-size: 0.8rem;
+            }
+
+            .form-group label {
+                font-size: 1rem;
+            }
+
+            .form-group input[type="text"],
+            .form-group input[type="tel"],
+            .form-group input[type="email"],
+            .form-group select {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+
+            #discountCode {
+                width: calc(100% - 100px);
+            }
+
+            #applyDiscount {
+                width: 90px;
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="/index.html">
+                    <img src="/img/hero.1280X1280 copy.PNG" alt="Nguyên Sinh Logo">
+                </a>
+            </div>
+            <nav>
+                <ul class="main-menu">
+                    <li><a href="/index.html">Trang Chủ</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="menu.html">Thực Đơn</a></li>
+                    <li><a href="order.html">Đặt Hàng</a></li>
+                    <li><a href="blog.html">Tin Tức</a></li>
+                    <li><a href="admin.html">Quản lý</a></li>
+                    <li><a href="locations.html">Cửa Hàng</a></li>
+                    <li><a href="account.html">Tài Khoản</a></li>
+                    <li><a href="cart.html">Giỏ hàng</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <div class="breadcrumb">
+                <ul>
+                    <li><a href="/index.html">Trang Chủ</a></li>
+                    <li><a href="/pages/cart.html">Giỏ Hàng</a></li>
+                    <li>Thanh Toán</li>
+                </ul>
+            </div>
+
+            <div class="checkout-container">
+                <h1 class="checkout-title">Thanh Toán</h1>
+
+                <div class="checkout-steps">
+                    <div class="step active">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Giỏ hàng</div>
+                    </div>
+                    <div class="step active">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Thanh toán</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Hoàn tất</div>
+                    </div>
+                </div>
+
+                <form id="checkoutForm">
+                    <div id="errorMessages" class="error-messages" style="display: none;">
+                        <!-- Lỗi sẽ được hiển thị ở đây -->
+                    </div>
+
+                    <div class="checkout-section">
+                        <h3>Thông Tin Đơn Hàng</h3>
+                        <div id="orderSummary" class="product-details">
+                            <!-- Thông tin đơn hàng sẽ được thêm bởi JavaScript -->
+                        </div>
+                        <div class="order-total">
+                            <h4>Tổng thanh toán:</h4>
+                            <span id="totalAmount">0đ</span>
+                        </div>
+                    </div>
+                    <div class="checkout-section">
+                        <h3>Mã Giảm Giá</h3>
+                        <div class="form-group">
+                            <input type="text" id="discountCode" name="discountCode" placeholder="Nhập mã giảm giá">
+                            <button type="button" id="applyDiscount" class="btn-secondary">Áp dụng</button>
+                        </div>
+                        <div id="discountResult"></div>
+                    </div>
+                    <div class="checkout-section">
+                        <h3>Thông Tin Giao Hàng</h3>
+                        <div class="form-group">
+                            <label for="fullName">Họ và Tên</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Số Điện Thoại</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="addressType">Loại địa chỉ</label>
+                            <div class="address-type-selector">
+                                <button type="button" class="address-type-btn active" data-type="new">Địa chỉ mới</button>
+                                <button type="button" class="address-type-btn" data-type="saved">Địa chỉ đã lưu</button>
+                            </div>
+                        </div>
+                        
+                        <div id="savedAddressContainer" style="display: none;">
+                            <div class="form-group">
+                                <label for="savedAddresses">Chọn địa chỉ đã lưu</label>
+                                <select id="savedAddresses" name="savedAddresses">
+                                    <option value="">Chọn địa chỉ</option>
+                                    <!-- Địa chỉ đã lưu sẽ được thêm bởi JavaScript -->
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div id="newAddressContainer">
+                            <div class="form-group">
+                                <label for="street">Số nhà, Đường</label>
+                                <input type="text" id="street" name="street" required>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="district">Quận/Huyện</label>
+                                    <input type="text" id="district" name="district" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ward">Phường/Xã</label>
+                                    <input type="text" id="ward" name="ward" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="city">Thành Phố/Tỉnh</label>
+                                <select id="city" name="city" required>
+                                    <option value="">Chọn thành phố</option>
+                                    <option value="HN">Hà Nội</option>
+                                    <option value="HCM">TP. Hồ Chí Minh</option>
+                                    <option value="DN">Đà Nẵng</option>
+                                    <option value="HP">Hải Phòng</option>
+                                    <option value="CT">Cần Thơ</option>
+                                    <option value="BD">Bình Dương</option>
+                                    <option value="DN">Đồng Nai</option>
+                                    <!-- Thêm các thành phố khác -->
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="address">Địa chỉ đầy đủ</label>
+                                <textarea id="address" name="address" rows="2" readonly></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="note">Ghi chú giao hàng (tùy chọn)</label>
+                                <textarea id="note" name="note" rows="2" placeholder="Ví dụ: Giao giờ hành chính, gọi trước khi giao..."></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="location-actions">
+                                    <button type="button" id="useCurrentLocation" class="btn-location">
+                                        <i class="fas fa-map-marker-alt"></i> Sử dụng vị trí hiện tại
+                                    </button>
+                                    <div id="locationStatus"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="saveAddress" name="saveAddress">
+                                    Lưu địa chỉ này cho lần sau
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Hiển thị khoảng cách và phí giao hàng -->
+                        <div class="shipping-info">
+                            <div class="distance-info" id="distanceInfo">
+                                <!-- Thông tin khoảng cách sẽ được thêm bởi JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <style>
+                        .form-row {
+                            display: flex;
+                            gap: 15px;
+                        }
+                        
+                        .form-row .form-group {
+                            flex: 1;
+                        }
+                        
+                        .address-type-selector {
+                            display: flex;
+                            gap: 10px;
+                            margin-bottom: 15px;
+                        }
+                        
+                        .address-type-btn {
+                            flex: 1;
+                            padding: 10px;
+                            border: 1px solid #ddd;
+                            background-color: #f8f8f8;
+                            border-radius: 8px;
+                            cursor: pointer;
+                            font-weight: 500;
+                            transition: all 0.3s;
+                        }
+                        
+                        .address-type-btn.active {
+                            background-color: var(--secondary-color);
+                            color: white;
+                            border-color: var(--secondary-color);
+                        }
+                        
+                        textarea {
+                            width: 100%;
+                            padding: 12px 15px;
+                            border: 1px solid #ddd;
+                            border-radius: 8px;
+                            font-size: 1rem;
+                            color: var(--primary-color);
+                            resize: vertical;
+                        }
+                        
+                        .location-actions {
+                            display: flex;
+                            align-items: center;
+                            gap: 15px;
+                        }
+                        
+                        .btn-location {
+                            padding: 10px 15px;
+                            background-color: #f0f0f0;
+                            border: 1px solid #ddd;
+                            border-radius: 8px;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+                            transition: all 0.3s;
+                        }
+                        
+                        .btn-location:hover {
+                            background-color: #e0e0e0;
+                        }
+                        
+                        #locationStatus {
+                            font-size: 0.9rem;
+                            color: #666;
+                        }
+                        
+                        .shipping-info {
+                            margin-top: 20px;
+                            padding: 15px;
+                            background-color: #f8f8f8;
+                            border-radius: 8px;
+                            border: 1px solid #eee;
+                        }
+                        
+                        .distance-info {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            font-size: 0.95rem;
+                        }
+                        
+                        @media (max-width: 768px) {
+                            .form-row {
+                                flex-direction: column;
+                                gap: 10px;
+                            }
+                        }
+                    </style>
+
+                    <div class="checkout-section">
+                        <h3>Phương Thức Thanh Toán</h3>
+                        <div class="form-group">
+                            <label>
+                                <input type="radio" name="paymentMethod" value="cod" checked>
+                                Thanh toán khi nhận hàng (COD)
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="radio" name="paymentMethod" value="bank">
+                                Chuyển khoản ngân hàng
+                            </label>
+                        </div>
+                        <div id="bankDetails" style="display: none;">
+                            <p>Thông tin tài khoản:</p>
+                            <p>Ngân hàng: VietcomBank</p>
+                            <p>Số tài khoản: 1234567890</p>
+                            <p>Chủ tài khoản: NGUYEN SINH</p>
+                        </div>
+                    </div>
+
+                 
+
+                 
+
+                    <button type="submit" class="btn-checkout">
+                        <i class="fas fa-lock"></i>
+                        Đặt Hàng
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="/img/hero.1280X1280 copy.PNG" alt="Nguyên Sinh Logo">
+                    <p>Nguyên bản gia truyền - 3 đời một vị</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Liên Kết Nhanh</h3>
+                    <ul>
+                        <li><a href="/index.html">Trang Chủ</a></li>
+                        <li><a href="about.html">Giới Thiệu</a></li>
+                        <li><a href="menu.html">Thực Đơn</a></li>
+                        <li><a href="order.html">Đặt Hàng</a></li>
+                        <li><a href="blog.html">Tin Tức</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Thông Tin Liên Hệ</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 141 Trần Đình Xu, Quận 1, TP.HCM</p>
+                    <p><i class="fas fa-phone"></i> Hotline: 08.1942.1942</p>
+                    <p><i class="fab fa-whatsapp"></i> Zalo: 0988.57.57.54</p>
+                    <p><i class="fas fa-envelope"></i> info@nguyensinh.com</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Kết Nối Với Chúng Tôi</h3>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/NguyenSinhHaNoi" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/nguyensinh.bistro/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://zalo.me/s/3478851884659907934/" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://g.page/r/Ceim_ECSeT-9EBM/review" target="_blank"><i class="fab fa-google"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nguyên Sinh. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/checkout.js"></script>
+</body>
+</html>

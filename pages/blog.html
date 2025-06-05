@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin Tức - Nguyên Sinh</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles specific to Blog page */
+        .blog-hero {
+            height: 60vh;
+            min-height: 400px;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/_12A7780.jpg') no-repeat center center;
+            background-size: cover;
+        }
+        
+        .blog-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .category-btn {
+            padding: 10px 20px;
+            background-color: #fff;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .category-btn:hover,
+        .category-btn.active {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .blog-post {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .blog-post:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .post-image {
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .blog-post:hover .post-image img {
+            transform: scale(1.1);
+        }
+        
+        .post-content {
+            padding: 25px;
+        }
+        
+        .post-category {
+            display: inline-block;
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+        
+        .post-title {
+            font-size: 1.4rem;
+            margin: 10px 0;
+            line-height: 1.4;
+        }
+        
+        .post-excerpt {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        
+        .post-date {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .read-more {
+            color: var(--primary-color);
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .read-more:hover {
+            color: var(--secondary-color);
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+        
+        .pagination-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            margin: 0 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .pagination-btn:hover,
+        .pagination-btn.active {
+            background-color: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+        }
+        
+        .featured-post {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .featured-post-image {
+            height: 100%;
+            min-height: 400px;
+        }
+        
+        .featured-post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .featured-post-content {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .featured-post-title {
+            font-size: 2rem;
+            margin: 15px 0;
+        }
+        
+        .featured-post-excerpt {
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 992px) {
+            .featured-post {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-post-image {
+                min-height: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../img/hero.1280X1280 copy.PNG" alt="Nguyên Sinh Logo">
+                </a>
+            </div>
+            <nav>
+                <ul class="main-menu">
+                    <li><a href="../index.html">Trang Chủ</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="menu.html">Thực Đơn</a></li>
+                    <li><a href="order.html">Đặt Hàng</a></li>
+                    <li><a href="blog.html" class="active">Tin Tức</a></li>
+                    <li><a href="locations.html">Cửa Hàng</a></li>
+                    <li><a href="account.html">Tài Khoản</a></li>
+                    <li><a href="cart.html">Giỏ hàng</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero blog-hero">
+        <div class="hero-content">
+            <h1>Tin Tức & Bài Viết</h1>
+            <h2>Cập nhật thông tin mới nhất từ Nguyên Sinh</h2>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Tin Tức & Bài Viết</h2>
+                <div class="divider"></div>
+                <p>Khám phá những câu chuyện thú vị về ẩm thực, văn hóa và lịch sử bánh mì Việt Nam</p>
+            </div>
+            
+            <div class="blog-categories">
+                <button class="category-btn active" data-category="all">Tất Cả</button>
+                <button class="category-btn" data-category="news">Tin Tức</button>
+                <button class="category-btn" data-category="recipes">Công Thức</button>
+                <button class="category-btn" data-category="culture">Văn Hóa</button>
+                <button class="category-btn" data-category="history">Lịch Sử</button>
+            </div>
+            
+            <!-- Featured Post -->
+            <div class="featured-post">
+                <div class="featured-post-image">
+                    <img src="../img/_12A7780.jpg" alt="Bánh Mì Việt Nam - Di Sản Ẩm Thực">
+                </div>
+                <div class="featured-post-content">
+                    <span class="post-category">Văn Hóa</span>
+                    <h3 class="featured-post-title">Bánh Mì Việt Nam - Di Sản Ẩm Thực Được UNESCO Vinh Danh</h3>
+                    <p class="featured-post-excerpt">Bánh mì Việt Nam vừa được UNESCO công nhận là một trong những di sản ẩm thực đặc sắc của thế giới. Hãy cùng tìm hiểu về hành trình của món ăn đường phố này từ những ngày đầu du nhập vào Việt Nam đến khi trở thành biểu tượng ẩm thực toàn cầu.</p>
+                    <div class="post-meta">
+                        <span class="post-date">15 Tháng 4, 2024</span>
+                        <a href="blog-detail.html?id=1" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Blog Posts Grid -->
+            <div class="blog-grid">
+                <!-- Blog Post 1 -->
+                <div class="blog-post" data-category="history">
+                    <div class="post-image">
+                        <img src="../img/_12A7784.jpg" alt="Lịch Sử Bánh Mì Việt Nam">
+                    </div>
+                    <div class="post-content">
+                        <span class="post-category">Lịch Sử</span>
+                        <h3 class="post-title">Lịch Sử Bánh Mì Việt Nam: Từ Thực Dân Đến Bản Sắc Dân Tộc</h3>
+                        <p class="post-excerpt">Khám phá hành trình hơn 100 năm của bánh mì tại Việt Nam, từ khi được người Pháp du nhập vào đầu thế kỷ 20 đến khi trở thành món ăn đặc trưng của người Việt.</p>
+                        <div class="post-meta">
+                            <span class="post-date">10 Tháng 4, 2024</span>
+                            <a href="blog-detail.html?id=2" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 2 -->
+                <div class="blog-post" data-category="recipes">
+                    <div class="post-image">
+                        <img src="../img/_12A7786.jpg" alt="Bí Quyết Làm Pate Gan">
+                    </div>
+                    <div class="post-content">
+                        <span class="post-category">Công Thức</span>
+                        <h3 class="post-title">Bí Quyết Làm Pate Gan Thơm Ngon Đúng Điệu</h3>
+                        <p class="post-excerpt">Chia sẻ công thức làm pate gan gà thủ công theo phương pháp truyền thống, giúp bạn tạo ra hương vị đậm đà, thơm ngon như tại Nguyên Sinh.</p>
+                        <div class="post-meta">
+                            <span class="post-date">5 Tháng 4, 2024</span>
+                            <a href="blog-detail.html?id=3" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 3 -->
+                <div class="blog-post" data-category="news">
+                    <div class="post-image">
+                        <img src="../img/_12A7819.jpg" alt="Chi Nhánh Mới">
+                    </div>
+                    <div class="post-content">
+                        <span class="post-category">Tin Tức</span>
+                        <h3 class="post-title">Nguyên Sinh Khai Trương Chi Nhánh Mới Tại Quận 7</h3>
+                        <p class="post-excerpt">Nguyên Sinh vừa chính thức khai trương chi nhánh mới tại Quận 7, TP.HCM, đánh dấu cột mốc phát triển quan trọng của thương hiệu bánh mì thịt nguội gia truyền.</p>
+                        <div class="post-meta">
+                            <span class="post-date">1 Tháng 4, 2024</span>
+                            <a href="blog-detail.html?id=4" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 4 -->
+                <div class="blog-post" data-category="culture">
+                    <div class="post-image">
+                        <img src="../img/không gian 9.jpg" alt="Văn Hóa Ẩm Thực Đường Phố">
+                    </div>
+                    <div class="post-content">
+                        <span class="post-category">Văn Hóa</span>
+                        <h3 class="post-title">Văn Hóa Ẩm Thực Đường Phố Việt Nam Qua Góc Nhìn Quốc Tế</h3>
+                        <p class="post-excerpt">Khám phá góc nhìn của các đầu bếp và nhà phê bình ẩm thực quốc tế về văn hóa ăn uống đường phố Việt Nam, đặc biệt là bánh mì thịt nguội.</p>
+                        <div class="post-meta">
+                            <span class="post-date">25 Tháng 3, 2024</span>
+                            <a href="blog-detail.html?id=5" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 5 -->
+                <div class="blog-post" data-category="recipes">
+                    <div class="post-image">
+                        <img src="../img/_12A7780.jpg" alt="Cách Làm Bánh Mì Giòn">
+                    </div>
+                    <div class="post-content">
+                        <span class="post-category">Công Thức</span>
+                        <h3 class="post-title">Bí Quyết Làm Bánh Mì Giòn Rụm Tại Nhà</h3>
+                        <p class="post-excerpt">Hướng dẫn chi tiết cách làm bánh mì giòn rụm tại nhà với những nguyên liệu đơn giản, giúp bạn tạo ra những ổ bánh mì thơm ngon như ngoài tiệm.</p>
+                        <div class="post-meta">
+                            <span class="post-date">20 Tháng 3, 2024</span>
+                            <a href="blog-detail.html?id=6" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 6 -->
+                <div class="blog-post" data-category="news">
+                    <div class="post-image">
+                        <img src="../img/_12A7784.jpg" alt="Nguyên Sinh Nhận Giải Thưởng">
+                    </div>
+                    <div class="post-content">
+                        <span class="post-category">Tin Tức</span>
+                        <h3 class="post-title">Nguyên Sinh Nhận Giải Thưởng "Thương Hiệu Ẩm Thực Di Sản"</h3>
+                        <p class="post-excerpt">Nguyên Sinh vừa vinh dự nhận giải thưởng "Thương Hiệu Ẩm Thực Di Sản" do Hiệp hội Ẩm thực Việt Nam trao tặng, ghi nhận đóng góp trong việc bảo tồn và phát triển ẩm thực truyền thống.</p>
+                        <div class="post-meta">
+                            <span class="post-date">15 Tháng 3, 2024</span>
+                            <a href="blog-detail.html?id=7" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <button class="pagination-btn"><i class="fas fa-ellipsis-h"></i></button>
+                <button class="pagination-btn">10</button>
+                <button class="pagination-btn"><i class="fas fa-angle-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Đăng Ký Nhận Tin</h2>
+                <p>Nhận thông tin mới nhất về sản phẩm, khuyến mãi và bài viết thú vị</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Nhập địa chỉ email của bạn" required>
+                    <button type="submit" class="btn btn-primary">Đăng Ký</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="../img/hero.1280X1280 copy.PNG" alt="Nguyên Sinh Logo">
+                    <p>Nguyên bản gia truyền - 3 đời một vị</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Liên Kết Nhanh</h3>
+                    <ul>
+                        <li><a href="../index.html">Trang Chủ</a></li>
+                        <li><a href="about.html">Giới Thiệu</a></li>
+                        <li><a href="menu.html">Thực Đơn</a></li>
+                        <li><a href="order.html">Đặt Hàng</a></li>
+                        <li><a href="blog.html">Tin Tức</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Thông Tin Liên Hệ</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 141 Trần Đình Xu, Quận 1, TP.HCM</p>
+                    <p><i class="fas fa-phone"></i> Hotline: 08.1942.1942</p>
+                    <p><i class="fab fa-whatsapp"></i> Zalo: 0988.57.57.54</p>
+                    <p><i class="fas fa-envelope"></i> info@nguyensinh.com</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Kết Nối Với Chúng Tôi</h3>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/NguyenSinhHaNoi" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/nguyensinh.bistro/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://zalo.me/s/3478851884659907934/" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://g.page/r/Ceim_ECSeT-9EBM/review" target="_blank"><i class="fab fa-google"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nguyên Sinh. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/blog.js"></script>
+    <script>
+        // Blog category filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const blogPosts = document.querySelectorAll('.blog-post');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const category = this.dataset.category;
+                    
+                    // Show/hide blog posts based on category
+                    blogPosts.forEach(post => {
+                        if (category === 'all' || post.dataset.category === category) {
+                            post.style.display = 'block';
+                        } else {
+                            post.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Pagination functionality
+            const paginationButtons = document.querySelectorAll('.pagination-btn');
+            
+            paginationButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    paginationButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Here you would typically load new content or change page
+                    // For demo purposes, we'll just scroll to top
+                    window.scrollTo({
+                        top: document.querySelector('.blog-section').offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

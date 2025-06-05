@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thực Đơn - Nguyên Sinh</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Modern Menu Styles */
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2691E;
+            --light-brown: #F4A460;
+            --cream: #FFF8DC;
+            --dark-brown: #654321;
+            --light-color: #f8f9fa;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-light: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+        }
+
+        /* Hero Section */
+        .menu-hero {
+            height: 70vh;
+            min-height: 500px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url('../img/menu-hero.jpg') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('../img/hero.1280X1280.PNG') center/cover;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            position: relative;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-content h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 40px;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .hero-stat {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .hero-stat:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--secondary-color);
+        }
+
+        .hero-stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .divider {
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-primary);
+            margin: 0 auto 25px;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px white, 0 0 0 6px var(--secondary-color);
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Menu Categories */
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: var(--gradient-light);
+            border-radius: 20px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .category-btn {
+            padding: 15px 30px;
+            background: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            transition: left 0.3s ease;
+            z-index: 1;
+        }
+
+        .category-btn span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .category-btn:hover::before,
+        .category-btn.active::before {
+            left: 0;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.3);
+        }
+
+        /* Search and Filter */
+        .menu-controls {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .search-wrapper {
+            position: relative;
+            max-width: 400px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: #f8f9fa;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .sort-select {
+            padding: 12px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            background: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .sort-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .view-toggle {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 25px;
+            padding: 5px;
+        }
+
+        .view-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: transparent;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .view-btn.active {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        /* Menu Items */
+        .menu-items {
+            margin-top: 40px;
+        }
+
+        .menu-category {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .menu-category-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .menu-category-title h3 {
+            display: inline-block;
+            background: white;
+            padding: 0 30px;
+            position: relative;
+            z-index: 1;
+            color: var(--primary-color);
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        .menu-category-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            z-index: 0;
+            border-radius: 2px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInUp 0.6s ease-out forwards;
+        }
+
+        .menu-item:nth-child(even) {
+            animation-delay: 0.1s;
+        }
+
+        .menu-item:nth-child(3n) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .menu-item-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .menu-item:hover .menu-item-image img {
+            transform: scale(1.1);
+        }
+
+        .menu-item-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .menu-item-info {
+            padding: 25px;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .menu-item-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 0;
+            color: var(--dark-brown);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .menu-item-title:hover {
+            color: var(--primary-color);
+        }
+
+        .menu-item-price {
+            color: var(--secondary-color);
+            font-weight: 700;
+            font-size: 1.3rem;
+            white-space: nowrap;
+        }
+
+                .menu-item-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .menu-item-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .menu-item-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #ffc107;
+        }
+
+        .menu-item-rating .rating-text {
+            color: #666;
+            margin-left: 5px;
+        }
+
+        .menu-item-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .menu-item-tag {
+            background: #f8f9fa;
+            color: #666;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            border: 1px solid #e9ecef;
+        }
+
+        .menu-item-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 25px;
+            padding: 5px;
+        }
+
+        .quantity-btn {
+            width: 35px;
+            height: 35px;
+            border: none;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .quantity-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            color: var(--dark-brown);
+        }
+
+        .add-to-cart-btn {
+            flex: 1;
+            padding: 12px 20px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .add-to-cart-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .add-to-cart-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .add-to-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.3);
+        }
+
+        .add-to-cart-btn:active {
+            transform: translateY(0);
+        }
+
+        /* List View */
+        .menu-grid.list-view {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .menu-grid.list-view .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 0;
+        }
+
+        .menu-grid.list-view .menu-item-image {
+            width: 200px;
+            height: 150px;
+            flex-shrink: 0;
+        }
+
+        .menu-grid.list-view .menu-item-info {
+            flex: 1;
+            padding: 20px 25px;
+        }
+
+        /* Loading State */
+        .loading-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 10px;
+            color: var(--dark-brown);
+        }
+
+        /* Quick View Modal */
+        .quick-view-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .quick-view-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .quick-view-header {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .quick-view-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .quick-view-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .quick-view-close:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: scale(1.1);
+        }
+
+        .quick-view-body {
+            padding: 30px;
+        }
+
+        .quick-view-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark-brown);
+        }
+
+        .quick-view-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .quick-view-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .quick-view-options {
+            margin-bottom: 30px;
+        }
+
+        .option-group {
+            margin-bottom: 20px;
+        }
+
+        .option-label {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark-brown);
+        }
+
+        .option-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .option-item {
+            padding: 8px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .option-item:hover,
+        .option-item.selected {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .quick-view-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .quick-view-quantity {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 25px;
+            padding: 5px;
+        }
+
+        .quick-view-add-btn {
+            flex: 1;
+            padding: 15px 30px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quick-view-add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .menu-grid {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content h2 {
+                font-size: 1.2rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+            }
+
+            .hero-stat {
+                width: 200px;
+            }
+
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .menu-categories {
+                padding: 20px;
+            }
+
+            .category-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+                min-width: 100px;
+            }
+
+            .menu-controls {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .search-wrapper {
+                max-width: none;
+            }
+
+            .view-toggle {
+                justify-self: center;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .menu-grid.list-view .menu-item {
+                flex-direction: column;
+            }
+
+            .menu-grid.list-view .menu-item-image {
+                width: 100%;
+                height: 200px;
+            }
+
+            .menu-item-actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .quantity-selector {
+                justify-self: center;
+            }
+
+            .quick-view-content {
+                margin: 10px;
+                max-height: 95vh;
+            }
+
+            .quick-view-header {
+                height: 250px;
+            }
+
+            .quick-view-body {
+                padding: 20px;
+            }
+
+            .quick-view-title {
+                font-size: 1.5rem;
+            }
+
+            .quick-view-actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .menu-categories {
+                padding: 15px;
+            }
+
+            .category-btn {
+                padding: 10px 15px;
+                font-size: 0.85rem;
+                min-width: 80px;
+            }
+
+            .menu-controls {
+                padding: 20px;
+            }
+
+            .menu-item-info {
+                padding: 20px;
+            }
+
+            .menu-item-title {
+                font-size: 1.2rem;
+            }
+
+            .menu-item-price {
+                font-size: 1.1rem;
+            }
+
+            .quick-view-header {
+                height: 200px;
+            }
+
+            .quick-view-body {
+                padding: 15px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .menu-hero,
+            .menu-controls,
+            .menu-item-actions,
+            .quick-view-modal {
+                display: none !important;
+            }
+
+            .menu-item {
+                break-inside: avoid;
+                margin-bottom: 20px;
+                box-shadow: none !important;
+                border: 1px solid #ddd;
+            }
+
+            .menu-item-image {
+                height: 150px;
+            }
+
+            body {
+                font-size: 12pt;
+                line-height: 1.4;
+            }
+
+            .section-header h2 {
+                color: #000 !important;
+                font-size: 18pt;
+            }
+
+            .menu-item-title {
+                color: #000 !important;
+                font-size: 14pt;
+            }
+
+            .menu-item-price {
+                color: #000 !important;
+                font-size: 12pt;
+            }
+        }
+
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            .menu-controls,
+            .menu-item {
+                background: #2a2a2a;
+                color: #fff;
+            }
+
+            .search-input,
+            .sort-select {
+                background: #333;
+                color: #fff;
+                border-color: #555;
+            }
+
+            .menu-item-tag {
+                background: #333;
+                color: #ccc;
+                border-color: #555;
+            }
+
+            .quantity-selector {
+                background: #333;
+            }
+
+            .quantity-btn {
+                background: #444;
+                color: #fff;
+            }
+
+            .quick-view-content {
+                background: #2a2a2a;
+                color: #fff;
+            }
+        }
+
+        /* High Contrast Mode */
+        @media (prefers-contrast: high) {
+            .menu-item {
+                border: 2px solid #000;
+            }
+
+            .category-btn {
+                border: 2px solid #000;
+            }
+
+            .category-btn.active {
+                background: #000;
+                color: #fff;
+            }
+
+                      .add-to-cart-btn {
+                background: #000;
+                border: 2px solid #000;
+            }
+
+            .search-input,
+            .sort-select {
+                border: 2px solid #000;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .menu-hero::before {
+                animation: none;
+            }
+
+            .menu-item:hover {
+                transform: none;
+            }
+
+            .menu-item:hover .menu-item-image img {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="/index.html">
+                    <img src="/img/hero.1280X1280 copy.PNG" alt="Nguyên Sinh Logo">
+                </a>
+            </div>
+            <nav>
+                <ul class="main-menu">
+                    <li><a href="/index.html">Trang Chủ</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="menu.html" class="active">Thực Đơn</a></li>
+                    <li><a href="order.html">Đặt Hàng</a></li>
+                    <li><a href="blog.html">Tin Tức</a></li>
+                    <li><a href="admin.html">Quản lý</a></li>
+                    <li><a href="locations.html">Cửa Hàng</a></li>
+                    <li><a href="account.html">Tài Khoản</a></li>
+                    <li><a href="cart.html">Giỏ hàng (<span id="cart-count">0</span>)</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="menu-hero">
+        <div class="hero-content">
+            <h1>Thực Đơn Nguyên Sinh</h1>
+            <h2>Hương vị truyền thống - Chất lượng đỉnh cao</h2>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-number" data-count="50">50+</div>
+                    <div class="hero-stat-label">Món ăn</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number" data-count="15">15+</div>
+                    <div class="hero-stat-label">Danh mục</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number" data-count="100">100%</div>
+                    <div class="hero-stat-label">Tự nhiên</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main style="padding-top: 80px; padding-bottom: 80px;">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="section-header">
+                <h2>Khám Phá Thực Đơn</h2>
+                <div class="divider"></div>
+                <p>Từ bánh mì truyền thống đến các món ăn hiện đại, tất cả đều được chế biến từ nguyên liệu tươi ngon nhất</p>
+            </div>
+
+            <!-- Menu Categories -->
+            <div class="menu-categories" id="menuCategories">
+                <button class="category-btn active" data-category="all">
+                    <span>Tất cả</span>
+                </button>
+                <!-- Categories will be loaded dynamically -->
+            </div>
+
+            <!-- Menu Controls -->
+            <div class="menu-controls">
+                <div class="search-wrapper">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm món ăn...">
+                    <button class="search-btn" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+
+                <select class="sort-select" id="sortSelect">
+                    <option value="name">Sắp xếp theo tên</option>
+                    <option value="price-low">Giá thấp đến cao</option>
+                    <option value="price-high">Giá cao đến thấp</option>
+                    <option value="rating">Đánh giá cao nhất</option>
+                    <option value="popular">Phổ biến nhất</option>
+                </select>
+
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="grid" title="Xem dạng lưới">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button class="view-btn" data-view="list" title="Xem dạng danh sách">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loadingState" class="loading-state" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Đang tải thực đơn...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>Không tìm thấy món ăn</h3>
+                <p>Thử tìm kiếm với từ khóa khác hoặc chọn danh mục khác</p>
+            </div>
+
+            <!-- Menu Items -->
+            <div class="menu-items" id="menuItems">
+                <!-- Menu items will be loaded dynamically -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Quick View Modal -->
+    <div id="quickViewModal" class="quick-view-modal">
+        <div class="quick-view-content">
+            <div class="quick-view-header">
+                <img id="quickViewImage" src="" alt="">
+                <button class="quick-view-close" onclick="menuManager.closeQuickView()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="quick-view-body">
+                <h3 class="quick-view-title" id="quickViewTitle"></h3>
+                <div class="quick-view-price" id="quickViewPrice"></div>
+                <div class="quick-view-description" id="quickViewDescription"></div>
+                
+                <div class="quick-view-options" id="quickViewOptions">
+                    <!-- Options will be loaded dynamically -->
+                </div>
+
+                <div class="quick-view-actions">
+                    <div class="quick-view-quantity">
+                        <button class="quantity-btn" onclick="menuManager.updateQuickViewQuantity(-1)">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <input type="number" class="quantity-input" id="quickViewQuantity" value="1" min="1" max="99">
+                        <button class="quantity-btn" onclick="menuManager.updateQuickViewQuantity(1)">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <button class="quick-view-add-btn" onclick="menuManager.addToCartFromQuickView()">
+                        <i class="fas fa-cart-plus"></i>
+                        Thêm vào giỏ hàng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="/img/hero.1280X1280 copy.PNG" alt="Nguyên Sinh Logo">
+                    <p>Nguyên bản gia truyền - 3 đời một vị</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Liên Kết Nhanh</h3>
+                    <ul>
+                        <li><a href="/index.html">Trang Chủ</a></li>
+                        <li><a href="about.html">Giới Thiệu</a></li>
+                        <li><a href="menu.html">Thực Đơn</a></li>
+                        <li><a href="order.html">Đặt Hàng</a></li>
+                        <li><a href="blog.html">Tin Tức</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Thông Tin Liên Hệ</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 141 Trần Đình Xu, Quận 1, TP.HCM</p>
+                    <p><i class="fas fa-phone"></i> Hotline: 08.1942.1942</p>
+                    <p><i class="fab fa-whatsapp"></i> Zalo: 0988.57.57.54</p>
+                    <p><i class="fas fa-envelope"></i> info@nguyensinh.com</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Kết Nối Với Chúng Tôi</h3>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/NguyenSinhHaNoi" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/nguyensinh.bistro/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://zalo.me/s/3478851884659907934/" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://g.page/r/Ceim_ECSeT-9EBM/review" target="_blank"><i class="fab fa-google"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nguyên Sinh. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/script.js"></script>
+    <script src="../js/menu.js"></script>
+</body>
+</html>
+
