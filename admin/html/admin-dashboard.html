@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Quản Trị - Bánh Mì Việt Nam</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/admin-dashboard.css">
+    <!-- Thêm Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Login Section -->
+    <section id="login-section">
+        <div class="login-container">
+            <div class="login-logo">
+                <img src="../images/logo.png" alt="Bánh Mì Việt Nam Logo">
+            </div>
+            <h2 class="login-title">Đăng Nhập Quản Trị</h2>
+            <div id="login-alert" class="login-alert"></div>
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn-login">Đăng Nhập</button>
+            </form>
+            <div class="login-footer">
+                &copy; 2025 Bánh Mì Việt Nam. All rights reserved.
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" class="admin-container">
+        <!-- Sidebar -->
+        <nav class="admin-sidebar">
+            <div class="sidebar-brand">
+                <img src="../../img/logo.jpg" alt="Logo" width="80" height="80">
+              
+            </div>
+            <div class="sidebar-divider"></div>
+            <div class="nav-heading">Core</div>
+            <div class="nav-item">
+                <a href="#" class="nav-link active" data-section="dashboard-section">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Tổng Quan</span>
+                </a>
+            </div>
+            <div class="sidebar-divider"></div>
+            <div class="nav-heading">Quản Lý</div>
+            <div class="nav-item">
+                <a href="#" class="nav-link" data-section="products-section">
+                    <i class="fas fa-fw fa-box"></i>
+                    <span>Sản Phẩm</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link" data-section="categories-section">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Danh Mục</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link" data-section="orders-section">
+                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    <span>Đơn Hàng</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link" data-section="users-section">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Người Dùng</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link" data-section="reservations-section">
+                    <i class="fas fa-fw fa-calendar-alt"></i>
+                    <span>Đặt Bàn</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link" data-section="tables-section">
+                    <i class="fas fa-fw fa-chair"></i>
+                    <span>Quản Lý Bàn</span>
+                </a>
+            </div>
+            <div class="sidebar-divider"></div>
+            <div class="nav-heading">Marketing</div>
+            <div class="nav-item">
+                <a href="#" class="nav-link" data-section="coupons-section">
+                    <i class="fas fa-fw fa-tags"></i>
+                    <span>Mã Giảm Giá</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link" data-section="blogs-section">
+                    <i class="fas fa-fw fa-newspaper"></i>
+                    <span>Bài Viết</span>
+                </a>
+            </div>
+            <div class="sidebar-divider"></div>
+            <div class="nav-heading">Cài Đặt</div>
+            <div class="nav-item">
+                <a href="#" class="nav-link" data-section="stores-section">
+                    <i class="fas fa-fw fa-store"></i>
+                    <span>Cửa Hàng</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Content -->
+        <div class="admin-content">
+            <!-- Header -->
+            <header class="admin-header">
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-info">
+                        <div class="user-name" id="admin-name">Admin</div>
+                        <div class="user-role">Quản trị viên</div>
+                    </div>
+                    <button id="logout-btn" class="btn-admin btn-sm btn-danger">
+                        <i class="fas fa-sign-out-alt"></i> Đăng Xuất
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="admin-main">
+                <!-- Dashboard Section -->
+                <section id="dashboard-section" class="admin-section active">
+                    <div class="section-header">
+                        <h2 class="section-title">Tổng Quan</h2>
+                        <div class="section-actions">
+                            <button class="btn-admin btn-sm" onclick="loadDashboardData()">
+                                <i class="fas fa-sync-alt"></i> Làm Mới
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="dashboard-cards">
+                        <div class="dashboard-card primary">
+                            <div class="dashboard-card-title">Tổng Đơn Hàng</div>
+                            <div id="total-orders" class="dashboard-card-value">0</div>
+                        </div>
+                        <div class="dashboard-card success">
+                            <div class="dashboard-card-title">Doanh Thu</div>
+                            <div id="total-revenue" class="dashboard-card-value">0 ₫</div>
+                        </div>
+                        <div class="dashboard-card warning">
+                            <div class="dashboard-card-title">Người Dùng</div>
+                            <div id="total-users" class="dashboard-card-value">0</div>
+                        </div>
+                        <div class="dashboard-card danger">
+                            <div class="dashboard-card-title">Sản Phẩm</div>
+                            <div id="total-products" class="dashboard-card-value">0</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Charts Section -->
+                    <div class="dashboard-charts">
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3 class="chart-title">Doanh Thu Theo Tháng</h3>
+                                <div class="chart-actions">
+                                    <select id="revenue-chart-year" class="chart-select">
+                                        <option value="2025">2025</option>
+                                        <option value="2024" selected>2024</option>
+                                        <option value="2023">2023</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="chart-body">
+                                <canvas id="revenue-chart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3 class="chart-title">Đơn Hàng Theo Trạng Thái</h3>
+                            </div>
+                            <div class="chart-body">
+                                <canvas id="orders-status-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Top Products Chart -->
+                    <div class="chart-container full-width">
+                        <div class="chart-header">
+                            <h3 class="chart-title">Top 10 Sản Phẩm Bán Chạy</h3>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="top-products-chart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Orders -->
+                    <div class="section-header">
+                        <h3 class="section-title">Đơn Hàng Gần Đây</h3>
+                        <a href="#" class="btn-admin btn-sm" onclick="activateSection('orders-section'); return false;">
+                            <i class="fas fa-arrow-right"></i> Xem Tất Cả
+                        </a>
+                    </div>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Mã Đơn</th>
+                                <th>Khách Hàng</th>
+                                <th>Ngày Đặt</th>
+                                <th>Tổng Tiền</th>
+                                <th>Trạng Thái</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recent-orders-body">
+                            <!-- Orders will be loaded here -->
+                        </tbody>
+                    </table>
+                    
+                    <!-- Recent Reservations -->
+                    <div class="section-header">
+                        <h3 class="section-title">Đặt Bàn Gần Đây</h3>
+                        <a href="#" class="btn-admin btn-sm" onclick="activateSection('reservations-section'); return false;">
+                            <i class="fas fa-arrow-right"></i> Xem Tất Cả
+                        </a>
+                    </div>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Khách Hàng</th>
+                                <th>Thời Gian</th>
+                                <th>Số Người</th>
+                                <th>Trạng Thái</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recent-reservations-body">
+                            <!-- Reservations will be loaded here -->
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Products Section -->
+                <section id="products-section" class="admin-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Quản Lý Sản Phẩm</h2>
+                        <button id="add-product-btn" class="btn-admin">Thêm Sản Phẩm</button>
+                    </div>
+                    
+                    <!-- Filters -->
+                    <div class="filters">
+                        <div class="filter-group">
+                            <label for="product-search">Tìm kiếm:</label>
+                            <input type="text" id="product-search" placeholder="Tên sản phẩm...">
+                        </div>
+                    </div>
+                    
+                    <!-- Products Table -->
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên Sản Phẩm</th>
+                                <th>Danh Mục</th>
+                                <th>Giá</th>
+                                <th>Tồn Kho</th>
+                                <th>Hình Ảnh</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-body">
+                            <!-- Products will be loaded here -->
+                        </tbody>
+                    </table>
+                    
+                    <!-- Pagination -->
+                    <div id="products-pagination" class="pagination"></div>
+                    
+                    <!-- Product Form -->
+                    <div id="product-form-container" class="form-container">
+                        <h3 id="product-form-title" class="form-title">Thêm Sản Phẩm Mới</h3>
+                        <form id="product-form">
+                            <input type="hidden" id="product-id">
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="product-name">Tên Sản Phẩm</label>
+                                        <input type="text" id="product-name" required>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="product-category">Danh Mục</label>
+                                        <select id="product-category" required>
+                                            <!-- Categories will be loaded here -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="product-price">Giá Bán (VNĐ)</label>
+                                        <input type="number" id="product-price" min="0" required>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="product-cost-price">Giá Gốc (VNĐ)</label>
+                                        <input type="number" id="product-cost-price" min="0" required>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="product-stock">Tồn Kho</label>
+                                        <input type="number" id="product-stock" min="0" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-description">Mô Tả</label>
+                                <textarea id="product-description" rows="4"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-image">URL Hình Ảnh</label>
+                                <input type="text" id="product-image">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Tùy Chọn Sản Phẩm</label>
+                                <div id="product-options-container">
+                                    <!-- Options will be added here -->
+                                </div>
+                                <button type="button" id="add-option-btn" class="btn-admin btn-sm">Thêm Tùy Chọn</button>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" id="cancel-product-btn" class="btn-admin btn-danger">Hủy</button>
+                                <button type="submit" class="btn-admin">Lưu</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Categories Section -->
+                <section id="categories-section" class="admin-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Quản Lý Danh Mục</h2>
+                        <button id="add-category-btn" class="btn-admin">Thêm Danh Mục</button>
+                    </div>
+                    
+                    <!-- Categories Table -->
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên Danh Mục</th>
+                                <th>Mô Tả</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="categories-body">
+                            <!-- Categories will be loaded here -->
+                        </tbody>
+                    </table>
+                    
+                    <!-- Category Form -->
+                    <div id="category-form-container" class="form-container">
+                        <h3 id="category-form-title" class="form-title">Thêm Danh Mục Mới</h3>
+                        <form id="category-form">
+                            <input type="hidden" id="category-id">
+                            <div class="form-group">
+                                <label for="category-name">Tên Danh Mục</label>
+                                <input type="text" id="category-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="category-description">Mô Tả</label>
+                                <textarea id="category-description" rows="4"></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" id="cancel-category-btn" class="btn-admin btn-danger">Hủy</button>
+                                <button type="submit" class="btn-admin">Lưu</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Orders Section -->
+                <section id="orders-section" class="admin-section">
+                    <h2 class="section-title">Quản Lý Đơn Hàng</h2>
+                    
+                    <!-- Filters -->
+                    <div class="filters">
+                        <div class="filter-group">
+                            <label for="order-status-filter">Trạng Thái:</label>
+                            <select id="order-status-filter">
+                                <option value="">Tất Cả</option>
+                                <option value="pending">Chờ Xử Lý</option>
+                                <option value="processing">Đang Xử Lý</option>
+                                <option value="shipped">Đang Giao</option>
+                                <option value="delivered">Đã Giao</option>
+                                <option value="cancelled">Đã Hủy</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="order-search">Tìm kiếm:</label>
+                            <input type="text" id="order-search" placeholder="Mã đơn hoặc tên khách hàng...">
+                        </div>
+                    </div>
+                    
+                    <!-- Orders Table -->
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Mã Đơn</th>
+                                <th>Khách Hàng</th>
+                                <th>Ngày Đặt</th>
+                                <th>Tổng Tiền</th>
+                                <th>Trạng Thái</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-body">
+                            <!-- Orders will be loaded here -->
+                        </tbody>
+                    </table>
+                    
+                    <!-- Pagination -->
+                    <div id="orders-pagination" class="pagination"></div>
+                    
+                    <!-- Order Detail Modal -->
+                    <div id="order-detail-container" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Chi Tiết Đơn Hàng #<span id="order-detail-id"></span></h3>
+                                <button id="close-order-detail-btn" class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="order-status">Trạng Thái Đơn Hàng</label>
+                                   <select id="order-status">
+                                        <option value="pending">Chờ xử lý</option>
+                                        <option value="confirmed">Đã xác nhận</option>
+                                        <option value="preparing">Đang chuẩn bị</option>
+                                        <option value="delivering">Đang giao hàng</option>
+                                        <option value="completed">Hoàn thành</option>
+                                        <option value="cancelled">Đã hủy</option>
+                                    </select>
+
+                                    <button id="update-order-status-btn" class="btn-admin" style="margin-top: 10px;">Cập Nhật Trạng Thái</button>
+                                </div>
+                                
+                                <h4>Thông Tin Khách Hàng</h4>
+                                <p><strong>Tên:</strong> <span id="order-customer-name"></span></p>
+                                <p><strong>Email:</strong> <span id="order-customer-email"></span></p>
+                                <p><strong>Số Điện Thoại:</strong> <span id="order-customer-phone"></span></p>
+                                <p><strong>Địa Chỉ Giao Hàng:</strong> <span id="order-shipping-address"></span></p>
+                                
+                                <h4>Chi Tiết Sản Phẩm</h4>
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Sản Phẩm</th>
+                                            <th>Đơn Giá</th>
+                                            <th>Số Lượng</th>
+                                            <th>Thành Tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="order-items-body">
+                                        <!-- Order items will be loaded here -->
+                                    </tbody>
+                                </table>
+                                
+                                <div style="margin-top: 20px; text-align: right;">
+                                    <p><strong>Tạm Tính:</strong> <span id="order-subtotal"></span></p>
+                                    <p><strong>Phí Vận Chuyển:</strong> <span id="order-shipping"></span></p>
+                                    <p><strong>Giảm Giá:</strong> <span id="order-discount"></span></p>
+                                    <p style="font-size: 1.2rem;"><strong>Tổng Cộng:</strong> <span id="order-total"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Users Section -->
+                <section id="users-section" class="admin-section">
+                    <h2 class="section-title">Quản Lý Người Dùng</h2>
+                    
+                    <!-- Filters -->
+                    <div class="filters">
+                        <div class="filter-group">
+                            <label for="user-search">Tìm kiếm:</label>
+                            <input type="text" id="user-search" placeholder="Tên hoặc email...">
+                        </div>
+                    </div>
+                    
+                    <!-- Users Table -->
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên</th>
+                                <th>Email</th>
+                                <th>Số Điện Thoại</th>
+                                <th>Vai Trò</th>
+                                <th>Ngày Đăng Ký</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-body">
+                            <!-- Users will be loaded here -->
+                        </tbody>
+                    </table>
+                    
+                    <!-- Pagination -->
+                    <div id="users-pagination" class="pagination"></div>
+                    
+                    <!-- User Detail Modal -->
+                    <div id="user-detail-container" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Chỉnh Sửa Người Dùng</h3>
+                                <button id="cancel-user-btn" class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="user-form">
+                                    <input type="hidden" id="user-id">
+                                    <div class="form-row">
+                                        <div class="form-col">
+                                            <div class="form-group">
+                                                <label for="user-name">Tên</label>
+                                                <input type="text" id="user-name" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-col">
+                                            <div class="form-group">
+                                                <label for="user-email">Email</label>
+                                                <input type="email" id="user-email" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-col">
+                                            <div class="form-group">
+                                                <label for="user-phone">Số Điện Thoại</label>
+                                                <input type="text" id="user-phone">
+                                            </div>
+                                        </div>
+                                        <div class="form-col">
+                                            <div class="form-group">
+                                                <label for="user-role">Vai Trò</label>
+                                                <select id="user-role" required>
+                                                    <option value="user">Người Dùng</option>
+                                                    <option value="admin">Quản Trị Viên</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn-admin">Lưu Thay Đổi</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Reservations Section -->
+                <section id="reservations-section" class="admin-section">
+                    <h2 class="section-title">Quản Lý Đặt Bàn</h2>
+                    
+                    <!-- Filters -->
+                    <div class="filters">
+                        <div class="filter-group">
+                            <label for="reservation-status-filter">Trạng Thái:</label>
+                            <select id="reservation-status-filter">
+                                <option value="">Tất Cả</option>
+                                <option value="pending">Chờ Xác Nhận</option>
+                                <option value="confirmed">Đã Xác Nhận</option>
+                                <option value="completed">Hoàn Thành</option>
+                                <option value="cancelled">Đã Hủy</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="reservation-search">Tìm kiếm:</label>
+                            <input type="text" id="reservation-search" placeholder="Tên hoặc số điện thoại...">
+                        </div>
+                    </div>
+                    
+                    <!-- Reservations Table -->
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên Khách Hàng</th>
+                                <th>Số Điện Thoại</th>
+                                <th>Ngày</th>
+                                <th>Giờ</th>
+                                <th>Số Người</th>
+                                <th>Trạng Thái</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reservations-body">
+                            <!-- Reservations will be loaded here -->
+                        </tbody>
+                    </table>
+                    
+                    <!-- Pagination -->
+                    <div id="reservations-pagination" class="pagination"></div>
+                    
+                    <!-- Reservation Detail Modal -->
+                    <div id="reservation-detail-container" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Chi Tiết Đặt Bàn #<span id="reservation-detail-id"></span></h3>
+                                <button id="cancel-reservation-btn" class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="reservation-form">
+                                    <div class="form-group">
+                                        <label for="reservation-status">Trạng Thái</label>
+                                        <select id="reservation-status" required>
+                                            <option value="pending">Chờ Xác Nhận</option>
+                                            <option value="confirmed">Đã Xác Nhận</option>
+                                            <option value="completed">Hoàn Thành</option>
+                                            <option value="cancelled">Đã Hủy</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="reservation-note">Ghi Chú</label>
+                                        <textarea id="reservation-note" rows="4"></textarea>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn-admin">Lưu Thay Đổi</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Coupons Section -->
+                <section id="coupons-section" class="admin-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Quản Lý Mã Giảm Giá</h2>
+                        <button id="add-coupon-btn" class="btn-admin">Thêm Mã Giảm Giá</button>
+                    </div>
+                    
+                    <!-- Coupons Table -->
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Mã</th>
+                                <th>Giảm Giá</th>
+                                <th>Ngày Bắt Đầu</th>
+                                <th>Ngày Kết Thúc</th>
+                                <th>Đã Sử Dụng</th>
+                                <th>Trạng Thái</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="coupons-body">
+                            <!-- Coupons will be loaded here -->
+                        </tbody>
+                    </table>
+                    
+                    <!-- Coupon Form -->
+                    <div id="coupon-form-container" class="form-container">
+                        <h3 id="coupon-form-title" class="form-title">Thêm Mã Giảm Giá Mới</h3>
+                        <form id="coupon-form">
+                            <input type="hidden" id="coupon-id">
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="coupon-code">Mã Giảm Giá</label>
+                                        <input type="text" id="coupon-code" required>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="coupon-discount">Phần Trăm Giảm Giá (%)</label>
+                                        <input type="number" id="coupon-discount" min="1" max="100" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="coupon-start-date">Ngày Bắt Đầu</label>
+                                        <input type="date" id="coupon-start-date" required>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="coupon-end-date">Ngày Kết Thúc</label>
+                                        <input type="date" id="coupon-end-date" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="coupon-min-purchase">Giá Trị Đơn Hàng Tối Thiểu (VNĐ)</label>
+                                        <input type="number" id="coupon-min-purchase" min="0" required>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="coupon-max-uses">Số Lần Sử Dụng Tối Đa</label>
+                                        <input type="number" id="coupon-max-uses" min="1" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" id="cancel-coupon-btn" class="btn-admin btn-danger">Hủy</button>
+                                <button type="submit" class="btn-admin">Lưu</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Blogs Section -->
+                <section id="blogs-section" class="admin-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Quản Lý Bài Viết</h2>
+                        <div class="section-actions">
+                            <button id="manage-blog-categories-btn" class="btn-admin">Quản Lý Danh Mục</button>
+                            <button id="add-blog-btn" class="btn-admin">Thêm Bài Viết</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Filters -->
+                    <div class="filters">
+                        <div class="filter-group">
+                            <label for="blog-search">Tìm kiếm:</label>
+                            <input type="text" id="blog-search" placeholder="Tiêu đề bài viết...">
+                        </div>
+                    </div>
+                    
+                    <!-- Blogs Table -->
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Hình Ảnh</th>
+                                <th>Tiêu Đề</th>
+                                <th>Danh Mục</th>
+                                <th>Trạng Thái</th>
+                                <th>Ngày Đăng</th>
+                                <th>Tác Giả</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="blogs-body">
+                            <!-- Blogs will be loaded here -->
+                        </tbody>
+                    </table>
+                    
+                    <!-- Pagination -->
+                    <div id="blogs-pagination" class="pagination"></div>
+                    
+                    <!-- Blog Form -->
+                    <div id="blog-form-container" class="form-container">
+                        <h3 id="blog-form-title" class="form-title">Thêm Bài Viết Mới</h3>
+                        <form id="blog-form">
+                            <input type="hidden" id="blog-id">
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="blog-title">Tiêu Đề</label>
+                                        <input type="text" id="blog-title" required>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="blog-category">Danh Mục</label>
+                                        <select id="blog-category" required>
+                                            <!-- Categories will be loaded here -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="blog-slug">Slug</label>
+                                        <input type="text" id="blog-slug" placeholder="tu-dong-tao-tu-tieu-de">
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="blog-post-url">URL Bài Viết</label>
+                                        <input type="text" id="blog-post-url" placeholder="/blog/tu-dong-tao-tu-tieu-de">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="blog-content">Nội Dung</label>
+                                <textarea id="blog-content" rows="10" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="blog-image">URL Hình Ảnh</label>
+                                <input type="text" id="blog-image">
+                                <div id="blog-image-preview" class="image-preview-container">
+                                    <!-- Image preview will be shown here -->
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="blog-published-at">Ngày Đăng</label>
+                                        <input type="date" id="blog-published-at">
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group checkbox-group">
+                                        <input type="checkbox" id="blog-is-published">
+                                        <label for="blog-is-published">Đăng bài ngay</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" id="cancel-blog-btn" class="btn-admin btn-danger">Hủy</button>
+                                <button type="submit" class="btn-admin">Lưu</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Blog Categories Management -->
+                    <div id="blog-categories-container" class="form-container">
+                        <h3 class="form-title">Quản Lý Danh Mục Bài Viết</h3>
+                        
+                        <!-- Blog Categories Table -->
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên Danh Mục</th>
+                                    <th>Slug</th>
+                                    <th>Thao Tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="blog-categories-body">
+                                <!-- Blog categories will be loaded here -->
+                            </tbody>
+                        </table>
+                        
+                        <!-- Blog Category Form -->
+                        <div id="blog-category-form-container" class="form-container">
+                            <h4 id="blog-category-form-title" class="form-title">Thêm Danh Mục Mới</h4>
+                            <form id="blog-category-form">
+                                <input type="hidden" id="blog-category-id">
+                                <div class="form-row">
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label for="blog-category-name">Tên Danh Mục</label>
+                                            <input type="text" id="blog-category-name" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label for="blog-category-slug">Slug</label>
+                                            <input type="text" id="blog-category-slug" placeholder="tu-dong-tao-tu-ten">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" id="cancel-blog-category-btn" class="btn-admin btn-danger">Hủy</button>
+                                    <button type="submit" class="btn-admin">Lưu</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="form-actions mt-20">
+                            <button type="button" id="add-blog-category-btn" class="btn-admin">Thêm Danh Mục</button>
+                            <button type="button" id="close-blog-categories-btn" class="btn-admin btn-secondary">Đóng</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Coupons Section -->
+                <section id="coupons-section" class="admin-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Quản Lý Mã Giảm Giá</h2>
+                        <button id="add-coupon-btn" class="btn-admin">Thêm Mã Giảm Giá</button>
+                    </div>
+                    
+                    <!-- Filters -->
+                    <div class="filters">
+                        <div class="filter-group">
+                            <label for="coupon-search">Tìm kiếm:</label>
+                            <input type="text" id="coupon-search" placeholder="Mã giảm giá...">
+                        </div>
+                        <div class="filter-group">
+                            <label for="coupon-status-filter">Trạng thái:</label>
+                            <select id="coupon-status-filter">
+                                <option value="all">Tất cả</option>
+                                <option value="active">Đang hoạt động</option>
+                                <option value="inactive">Không hoạt động</option>
+                                <option value="expired">Đã hết hạn</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Coupons Table -->
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Mã Code</th>
+                                <th>Mô tả</th>
+                                <th>Loại</th>
+                                <th>Giá trị</th>
+                                <th>Đơn hàng tối thiểu</th>
+                                <th>Ngày bắt đầu</th>
+                                <th>Ngày kết thúc</th>
+                                <th>Đã dùng</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="coupons-body">
+                            <!-- Coupons will be loaded here -->
+                        </tbody>
+                    </table>
+                    
+                    <!-- Pagination -->
+                    <div id="coupons-pagination" class="pagination"></div>
+                    
+                    <!-- Coupon Form -->
+                    <div id="coupon-form-container" class="form-container">
+                        <h3 id="coupon-form-title" class="form-title">Thêm Mã Giảm Giá Mới</h3>
+                        <form id="coupon-form">
+                            <input type="hidden" id="coupon-id">
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="coupon-code">Mã Code</label>
+                                        <input type="text" id="coupon-code" required>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="coupon-description">Mô tả</label>
+                                        <input type="text" id="coupon-description">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="coupon-discount-type">Loại giảm giá</label>
+                                        <select id="coupon-discount-type" required>
+                                            <option value="percent">Phần trăm (%)</option>
+                                            <option value="fixed">Số tiền cố định (VNĐ)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="coupon-discount-value">Giá trị giảm</label>
+                                        <input type="number" id="coupon-discount-value" min="0" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="coupon-min-order">Giá trị đơn hàng tối thiểu (VNĐ)</label>
+                                        <input type="number" id="coupon-min-order" min="0" value="0">
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="coupon-usage-limit">Giới hạn sử dụng</label>
+                                        <input type="number" id="coupon-usage-limit" min="1">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="coupon-valid-from">Ngày bắt đầu</label>
+                                        <input type="date" id="coupon-valid-from" required>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="coupon-valid-to">Ngày kết thúc</label>
+                                        <input type="date" id="coupon-valid-to" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group checkbox-group">
+                                        <input type="checkbox" id="coupon-is-active" checked>
+                                        <label for="coupon-is-active">Kích hoạt</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" id="cancel-coupon-btn" class="btn-admin btn-danger">Hủy</button>
+                                <button type="submit" class="btn-admin">Lưu</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Stores Section -->
+                <section id="stores-section" class="admin-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Quản Lý Cửa Hàng</h2>
+                        <button id="add-store-btn" class="btn-admin">Thêm Cửa Hàng</button>
+                    </div>
+                    
+                    <!-- Stores Table -->
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên Cửa Hàng</th>
+                                <th>Địa Chỉ</th>
+                                <th>Quận/Huyện</th>
+                                <th>Thành Phố</th>
+                                <th>Số Điện Thoại</th>
+                                <th>Giờ Mở Cửa</th>
+                                <th>Tọa Độ</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stores-body">
+                            <!-- Stores will be loaded here -->
+                        </tbody>
+                    </table>
+                    
+                    <!-- Store Form -->
+                    <div id="store-form-container" class="form-container">
+                        <h3 id="store-form-title" class="form-title">Thêm Cửa Hàng Mới</h3>
+                        <form id="store-form">
+                            <input type="hidden" id="store-id">
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="store-name">Tên Cửa Hàng</label>
+                                        <input type="text" id="store-name" required>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="store-phone">Số Điện Thoại</label>
+                                        <input type="text" id="store-phone">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="store-address">Địa Chỉ</label>
+                                <input type="text" id="store-address" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="store-district">Quận/Huyện</label>
+                                        <input type="text" id="store-district">
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="store-city">Thành Phố</label>
+                                        <input type="text" id="store-city">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="store-opening-hours">Giờ Mở Cửa (Ví dụ: 7:00 - 22:00)</label>
+                                <input type="text" id="store-opening-hours">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="store-lat">Vĩ Độ (Latitude)</label>
+                                        <input type="number" id="store-lat" step="0.0000001" placeholder="Ví dụ: 10.7756587">
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="store-lng">Kinh Độ (Longitude)</label>
+                                        <input type="number" id="store-lng" step="0.0000001" placeholder="Ví dụ: 106.7004238">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" id="cancel-store-btn" class="btn-admin btn-danger">Hủy</button>
+                                <button type="submit" class="btn-admin">Lưu</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Tables Section -->
+                <section id="tables-section" class="admin-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Quản Lý Bàn</h2>
+                        <div class="section-actions">
+                            <button id="add-table-btn" class="btn-admin">
+                                <i class="fas fa-plus"></i> Thêm Bàn Mới
+                            </button>
+                            <button id="bulk-update-tables-btn" class="btn-admin btn-info">
+                                <i class="fas fa-sync-alt"></i> Cập Nhật Hàng Loạt
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Filters -->
+                    <div class="filters">
+                        <div class="filter-group">
+                            <label for="store-filter">Cửa hàng:</label>
+                            <select id="store-filter" class="form-control">
+                                <!-- Store options will be loaded here -->
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="table-status-filter">Trạng thái:</label>
+                            <select id="table-status-filter" class="form-control">
+                                <option value="all">Tất cả</option>
+                                <option value="available">Trống</option>
+                                <option value="occupied">Đang sử dụng</option>
+                                <option value="reserved">Đã đặt</option>
+                                <option value="maintenance">Bảo trì</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="table-search">Tìm kiếm:</label>
+                            <input type="text" id="table-search" placeholder="Số bàn hoặc vị trí...">
+                        </div>
+                        <div class="view-toggle">
+                            <button id="list-view-btn" class="btn-admin btn-sm active" title="Xem dạng danh sách">
+                                <i class="fas fa-list"></i>
+                            </button>
+                            <button id="grid-view-btn" class="btn-admin btn-sm" title="Xem dạng lưới">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button id="floor-plan-view-btn" class="btn-admin btn-sm" title="Xem sơ đồ">
+                                <i class="fas fa-map"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Tables List View -->
+                    <div id="tables-list-view">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Số bàn</th>
+                                    <th>Loại bàn</th>
+                                    <th>Số chỗ ngồi</th>
+                                    <th>Cửa hàng</th>
+                                    <th>Vị trí</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tables-body">
+                                <!-- Tables will be loaded here -->
+                            </tbody>
+                        </table>
+                        
+                        <!-- Pagination -->
+                        <div id="tables-pagination" class="pagination"></div>
+                    </div>
+                    
+                    <!-- Tables Grid View -->
+                    <div id="tables-grid-view" style="display: none;">
+                        <div class="tables-filter-tags" id="tables-filter-tags">
+                            <!-- Filter tags will be displayed here -->
+                        </div>
+                        <div id="tables-grid" class="tables-grid">
+                            <!-- Tables grid will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Floor Plan View -->
+                    <div id="floor-plan-view" style="display: none;">
+                        <div class="floor-plan-controls">
+                            <div class="floor-plan-legend">
+                                <div class="legend-item">
+                                    <span class="status-indicator available"></span> Trống
+                                </div>
+                                <div class="legend-item">
+                                    <span class="status-indicator occupied"></span> Đang sử dụng
+                                </div>
+                                <div class="legend-item">
+                                    <span class="status-indicator reserved"></span> Đã đặt
+                                </div>
+                                <div class="legend-item">
+                                    <span class="status-indicator maintenance"></span> Bảo trì
+                                </div>
+                            </div>
+                            <div class="floor-plan-actions">
+                                <button id="save-floor-plan-btn" class="btn-admin btn-sm btn-success">
+                                    <i class="fas fa-save"></i> Lưu Vị Trí
+                                </button>
+                                <button id="reset-floor-plan-btn" class="btn-admin btn-sm btn-danger">
+                                    <i class="fas fa-undo"></i> Đặt Lại
+                                </button>
+                            </div>
+                        </div>
+                        <div id="floor-plan-container" class="floor-plan-container">
+                            <div id="floor-plan" class="floor-plan">
+                                <!-- Floor plan will be rendered here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Table Form -->
+                    <div id="table-form-container" class="form-container">
+                        <h3 id="table-form-title" class="form-title">Thêm Bàn Mới</h3>
+                        <form id="table-form">
+                            <input type="hidden" id="table-id">
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="table-number">Số bàn</label>
+                                        <input type="number" id="table-number" min="1" required>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="table-store">Cửa hàng</label>
+                                        <select id="table-store" required>
+                                            <!-- Stores will be loaded here -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="table-type">Loại bàn</label>
+                                        <select id="table-type" required>
+                                            <option value="round">Bàn tròn</option>
+                                            <option value="rectangle">Bàn chữ nhật</option>
+                                            <option value="square">Bàn vuông</option>
+                                            <option value="booth">Bàn booth</option>
+                                            <option value="large">Bàn lớn</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="table-seats">Số chỗ ngồi</label>
+                                        <select id="table-seats" required>
+                                            <option value="2">2 chỗ</option>
+                                            <option value="4" selected>4 chỗ</option>
+                                            <option value="6">6 chỗ</option>
+                                            <option value="8">8 chỗ</option>
+                                            <option value="10">10 chỗ</option>
+                                            <option value="12">12 chỗ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="table-status">Trạng thái</label>
+                                        <select id="table-status" required>
+                                            <option value="available">Trống</option>
+                                            <option value="occupied">Đang sử dụng</option>
+                                            <option value="reserved">Đã đặt</option>
+                                            <option value="maintenance">Bảo trì</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="table-location">Vị trí trong cửa hàng</label>
+                                        <input type="text" id="table-location" placeholder="Ví dụ: Tầng 1, Khu vực sân vườn...">
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="table-position-x">Vị trí X</label>
+                                        <input type="number" id="table-position-x" min="0">
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="table-position-y">Vị trí Y</label>
+                                        <input type="number" id="table-position-y" min="0">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="table-notes">Ghi chú</label>
+                                <textarea id="table-notes" rows="3"></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" id="cancel-table-btn" class="btn-admin btn-danger">Hủy</button>
+                                <button type="submit" class="btn-admin">Lưu</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Bulk Update Form -->
+                    <div id="bulk-update-form-container" class="form-container">
+                        <h3 class="form-title">Cập Nhật Hàng Loạt</h3>
+                        <form id="bulk-update-form">
+                            <div class="form-group">
+                                <label for="bulk-update-store">Cửa hàng</label>
+                                <select id="bulk-update-store" required>
+                                    <!-- Stores will be loaded here -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="bulk-update-status">Trạng thái hiện tại</label>
+                                <select id="bulk-update-status" required>
+                                    <option value="all">Tất cả</option>
+                                    <option value="available">Trống</option>
+                                    <option value="occupied">Đang sử dụng</option>
+                                    <option value="reserved">Đã đặt</option>
+                                    <option value="maintenance">Bảo trì</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="bulk-update-new-status">Trạng thái mới</label>
+                                <select id="bulk-update-new-status" required>
+                                    <option value="available">Trống</option>
+                                    <option value="occupied">Đang sử dụng</option>
+                                    <option value="reserved">Đã đặt</option>
+                                    <option value="maintenance">Bảo trì</option>
+                                </select>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" id="cancel-bulk-update-btn" class="btn-admin btn-danger">Hủy</button>
+                                <button type="submit" class="btn-admin">Cập Nhật</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Quick Status Change Modal -->
+                    <div id="status-change-modal" class="modal" style="display: none;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Thay Đổi Trạng Thái Bàn</h3>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="status-change-table-info"></div>
+                                <div class="status-options">
+                                    <button class="status-option available" data-status="available">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Trống</span>
+                                    </button>
+                                    <button class="status-option occupied" data-status="occupied">
+                                        <i class="fas fa-utensils"></i>
+                                        <span>Đang sử dụng</span>
+                                    </button>
+                                    <button class="status-option reserved" data-status="reserved">
+                                        <i class="fas fa-calendar-check"></i>
+                                        <span>Đã đặt</span>
+                                    </button>
+                                    <button class="status-option maintenance" data-status="maintenance">
+                                        <i class="fas fa-tools"></i>
+                                        <span>Bảo trì</span>
+                                    </button>
+                                </div>
+                                <div class="form-group">
+                                    <label for="status-change-note">Ghi chú</label>
+                                    <textarea id="status-change-note" rows="2"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="cancel-status-change" class="btn-admin btn-danger">Hủy</button>
+                                <button id="confirm-status-change" class="btn-admin">Xác nhận</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Reservations Section -->
+                <section id="reservations-section" class="admin-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Quản Lý Đặt Bàn</h2>
+                        <button id="add-reservation-btn" class="btn-admin">Thêm Đặt Bàn</button>
+                    </div>
+                    
+                    <!-- Filters -->
+                    <div class="filters">
+                        <div class="filter-group">
+                            <label for="reservation-store-filter">Cửa hàng:</label>
+                            <select id="reservation-store-filter" class="form-control">
+                                <!-- Store options will be loaded here -->
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="reservation-status-filter">Trạng thái:</label>
+                            <select id="reservation-status-filter" class="form-control">
+                                <option value="all">Tất cả</option>
+                                <option value="pending">Chờ xác nhận</option>
+                                <option value="confirmed">Đã xác nhận</option>
+                                <option value="completed">Hoàn thành</option>
+                                <option value="cancelled">Đã hủy</option>
+                                <option value="no_show">Không đến</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="reservation-date-filter">Ngày:</label>
+                            <input type="date" id="reservation-date-filter" class="form-control">
+                        </div>
+                        <div class="filter-group">
+                            <label for="reservation-search">Tìm kiếm:</label>
+                            <input type="text" id="reservation-search" placeholder="Tên hoặc SĐT...">
+                        </div>
+                    </div>
+                    
+                    <!-- Reservations Table -->
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Khách hàng</th>
+                                <th>Số điện thoại</th>
+                                <th>Ngày</th>
+                                <th>Giờ</th>
+                                <th>Số người</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reservations-body">
+                            <!-- Reservations will be loaded here -->
+                        </tbody>
+                    </table>
+                    
+                    <!-- Pagination -->
+                    <div id="reservations-pagination" class="pagination"></div>
+                    
+                    <!-- Reservation Detail -->
+                    <div id="reservation-detail-container" class="form-container">
+                        <h3 class="form-title">Chi tiết đặt bàn</h3>
+                        <div id="reservation-detail">
+                            <div class="detail-row">
+                                <div class="detail-label">ID:</div>
+                                <div class="detail-value" id="detail-reservation-id"></div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Khách hàng:</div>
+                                <div class="detail-value" id="detail-customer-name"></div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Số điện thoại:</div>
+                                <div class="detail-value" id="detail-customer-phone"></div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Email:</div>
+                                <div class="detail-value" id="detail-customer-email"></div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Ngày đặt:</div>
+                                <div class="detail-value" id="detail-reservation-date"></div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Giờ đặt:</div>
+                                <div class="detail-value" id="detail-reservation-time"></div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Số người:</div>
+                                <div class="detail-value" id="detail-guests"></div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Bàn:</div>
+                                <div class="detail-value" id="detail-table"></div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Cửa hàng:</div>
+                                <div class="detail-value" id="detail-store"></div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Trạng thái:</div>
+                                <div class="detail-value" id="detail-status"></div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Ghi chú:</div>
+                                <div class="detail-value" id="detail-notes"></div>
+                            </div>
+                        </div>
+                        
+                        <form id="reservation-form">
+                            <input type="hidden" id="reservation-id">
+                            <div class="form-group">
+                                <label for="reservation-status">Cập nhật trạng thái</label>
+                                <select id="reservation-status" required>
+                                    <option value="pending">Chờ xác nhận</option>
+                                    <option value="confirmed">Đã xác nhận</option>
+                                    <option value="completed">Hoàn thành</option>
+                                    <option value="cancelled">Đã hủy</option>
+                                    <option value="no_show">Không đến</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="reservation-note">Ghi chú</label>
+                                <textarea id="reservation-note" rows="3"></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" id="cancel-reservation-btn" class="btn-admin btn-danger">Đóng</button>
+                                <button type="submit" class="btn-admin">Cập nhật</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Add Reservation Form -->
+                    <div id="add-reservation-container" class="form-container">
+                        <h3 class="form-title">Thêm đặt bàn mới</h3>
+                        <form id="add-reservation-form">
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="new-customer-name">Tên khách hàng</label>
+                                        <input type="text" id="new-customer-name" required>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="new-customer-phone">Số điện thoại</label>
+                                        <input type="tel" id="new-customer-phone" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-customer-email">Email</label>
+                                <input type="email" id="new-customer-email">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="new-reservation-date">Ngày đặt</label>
+                                        <input type="date" id="new-reservation-date" required>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="new-reservation-time">Giờ đặt</label>
+                                        <input type="time" id="new-reservation-time" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="new-reservation-guests">Số người</label>
+                                        <select id="new-reservation-guests" required>
+                                            <option value="1">1 người</option>
+                                            <option value="2" selected>2 người</option>
+                                            <option value="3">3 người</option>
+                                            <option value="4">4 người</option>
+                                            <option value="5">5 người</option>
+                                            <option value="6">6 người</option>
+                                            <option value="8">8 người</option>
+                                            <option value="10">10 người</option>
+                                            <option value="12">12 người</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="new-reservation-store">Cửa hàng</label>
+                                        <select id="new-reservation-store" required>
+                                            <!-- Stores will be loaded here -->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="new-reservation-table">Bàn</label>
+                                        <select id="new-reservation-table" required>
+                                            <option value="">-- Chọn bàn --</option>
+                                            <!-- Tables will be loaded here -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-reservation-notes">Ghi chú</label>
+                                <textarea id="new-reservation-notes" rows="3"></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" id="cancel-add-reservation-btn" class="btn-admin btn-danger">Hủy</button>
+                                <button type="submit" class="btn-admin">Lưu</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Notification Container -->
+    <div id="notification-container"></div>
+
+    <script src="../js/admin-dashboard.js"></script>
+    <script>
+        // Initialize sidebar toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if sidebar state is saved in localStorage
+            const sidebarToggled = localStorage.getItem('sidebar-toggled') === 'true';
+            if (sidebarToggled) {
+                document.body.classList.add('sidebar-toggled');
+            }
+            
+            // Save sidebar state when toggled
+            document.getElementById('sidebar-toggle').addEventListener('click', function() {
+                localStorage.setItem('sidebar-toggled', document.body.classList.contains('sidebar-toggled'));
+            });
+        });
+    </script>
+</body>
+</html>

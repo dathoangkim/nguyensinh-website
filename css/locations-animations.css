@@ -1,0 +1,1097 @@
+/* Advanced Animations for Locations Page */
+
+/* Loading Animations */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -468px 0;
+    }
+    100% {
+        background-position: 468px 0;
+    }
+}
+
+.skeleton {
+    animation: shimmer 1.2s ease-in-out infinite;
+    background: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-size: 800px 104px;
+}
+
+/* Store Card Animations */
+.store-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.store-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.store-card:hover .store-image img {
+    transform: scale(1.05);
+}
+
+.store-image {
+    overflow: hidden;
+    border-radius: 12px 12px 0 0;
+}
+
+.store-image img {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Badge Animations */
+.store-badge {
+    animation: fadeInDown 0.6s ease-out;
+    animation-delay: 0.3s;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Button Hover Effects */
+.store-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.store-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.store-btn:hover::before {
+    left: 100%;
+}
+
+.store-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Filter Button Animations */
+.filter-btn {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.filter-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.filter-btn.active::after,
+.filter-btn:hover::after {
+    width: 100%;
+}
+
+/* Map Animations */
+.map-container {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.map-store-item {
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.map-store-item:hover,
+.map-store-item.active {
+    background: rgba(139, 69, 19, 0.1);
+    border-left-color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+/* Modal Animations */
+.store-modal {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.store-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.store-modal .modal-content {
+    transform: scale(0.8) translateY(50px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.store-modal.active .modal-content {
+    transform: scale(1) translateY(0);
+}
+
+/* Search Input Animations */
+.search-input-wrapper {
+    position: relative;
+}
+
+.search-input {
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15);
+}
+
+.search-btn {
+    transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+    background: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+/* Loading States */
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Status Indicators */
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+}
+
+.status-dot.open {
+    background: #28a745;
+}
+
+.status-dot.closed {
+    background: #dc3545;
+    animation: none;
+}
+
+/* Hero Stats Animation */
+.hero-stats {
+    animation: fadeInUp 1s ease-out;
+    animation-delay: 0.6s;
+    animation-fill-mode: both;
+}
+
+.hero-stat {
+    transition: transform 0.3s ease;
+}
+
+.hero-stat:hover {
+    transform: scale(1.1);
+}
+
+.hero-stat-number {
+    animation: countUp 2s ease-out;
+    animation-delay: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Animations */
+@media (max-width: 768px) {
+    .store-card:hover {
+        transform: translateY(-4px);
+    }
+    
+    .store-btn:hover {
+        transform: translateY(-1px);
+    }
+    
+    .map-store-item:hover {
+        transform: translateX(3px);
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .store-card:hover {
+        transform: none;
+    }
+    
+    .store-image img {
+        transform: none !important;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .skeleton {
+        background: linear-gradient(to right, #2a2a2a 0%, #3a3a3a 20%, #2a2a2a 40%, #2a2a2a 100%);
+    }
+    
+    .map-store-item:hover,
+    .map-store-item.active {
+        background: rgba(139, 69, 19, 0.2);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .store-card {
+        break-inside: avoid;
+        box-shadow: none !important;
+        transform: none !important;
+    }
+    
+    .store-btn,
+    .filter-btn,
+    .search-input-wrapper,
+    .map-container {
+        display: none !important;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .store-card {
+        border: 2px solid #000;
+    }
+    
+    .store-btn {
+        border: 2px solid currentColor;
+    }
+    
+    .status-dot.open {
+        background: #000;
+    }
+    
+    .status-dot.closed {
+        background: #fff;
+        border: 2px solid #000;
+    }
+}
+
+/* Focus Styles for Accessibility */
+.store-card:focus-within {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.filter-btn:focus,
+.store-btn:focus,
+.search-btn:focus {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .store-card:hover {
+        transform: none;
+    }
+    
+    .store-btn:hover {
+        transform: none;
+    }
+    
+    .store-card:active {
+        transform: scale(0.98);
+    }
+    
+    .store-btn:active {
+        transform: scale(0.95);
+    }
+}
+/* Responsive Styles for Locations Page */
+
+/* Extra Large Devices (1400px and up) */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+    
+    .stores-grid.grid-view {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .hero-stats {
+        gap: 80px;
+    }
+    
+    .map-container {
+        height: 600px;
+    }
+}
+
+/* Large Devices (1200px and up) */
+@media (min-width: 1200px) {
+    .stores-grid.grid-view {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+    
+    .search-filter-section {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        gap: 30px;
+        align-items: center;
+    }
+    
+    .map-sidebar {
+        width: 350px;
+    }
+}
+
+/* Medium Devices (992px and up) */
+@media (min-width: 992px) {
+    .locations-hero {
+        height: 60vh;
+        min-height: 400px;
+    }
+    
+    .hero-content h1 {
+        font-size: 3.5rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .stores-grid.grid-view {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+    
+    .map-container {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        height: 500px;
+    }
+    
+    .modal-content {
+        max-width: 800px;
+        margin: 50px auto;
+    }
+    
+    .modal-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Small Devices (768px and up) */
+@media (min-width: 768px) {
+    .search-controls {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        gap: 20px;
+        align-items: center;
+    }
+    
+    .filter-buttons {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .view-toggle {
+        display: flex;
+        gap: 5px;
+    }
+    
+    .stores-grid.list-view .store-card {
+        display: grid;
+        grid-template-columns: 200px 1fr auto;
+        gap: 20px;
+        align-items: center;
+    }
+    
+    .stores-grid.list-view .store-image {
+        border-radius: 8px;
+    }
+    
+    .stores-grid.list-view .store-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .hero-stats {
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+    }
+    
+    .cta-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+    }
+}
+
+/* Extra Small Devices (576px and up) */
+@media (min-width: 576px) {
+    .modal-content {
+        margin: 30px;
+        border-radius: 12px;
+    }
+    
+    .modal-actions {
+        display: flex;
+        gap: 15px;
+    }
+    
+    .modal-btn {
+        flex: 1;
+    }
+}
+
+/* Mobile Devices (up to 767px) */
+@media (max-width: 767px) {
+    .locations-hero {
+        height: 50vh;
+        min-height: 300px;
+        padding: 40px 20px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .hero-stat {
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        backdrop-filter: blur(10px);
+    }
+    
+    .section-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .search-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .search-input-wrapper {
+        width: 100%;
+    }
+    
+    .filter-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .view-toggle {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+    }
+    
+    .map-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .map-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 15px;
+    }
+    
+    .map-container {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    #map {
+        height: 300px;
+        order: 2;
+    }
+    
+    .map-sidebar {
+        order: 1;
+        width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        background: #f8f9fa;
+    }
+    
+    .stores-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .stores-grid.list-view .store-card {
+        display: block;
+    }
+    
+    .store-card {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    
+    .store-content {
+        padding: 20px;
+    }
+    
+      .store-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 15px;
+    }
+    
+    .store-btn {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+        text-align: center;
+    }
+    
+    .store-info-item {
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+    }
+    
+    .store-info-item i {
+        width: 20px;
+        text-align: center;
+        margin-right: 8px;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .cta-btn {
+        width: 100%;
+        max-width: 280px;
+        padding: 15px 30px;
+        font-size: 1rem;
+    }
+}
+
+/* Small Mobile Devices (up to 575px) */
+@media (max-width: 575px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .locations-hero {
+        height: 40vh;
+        min-height: 250px;
+        padding: 30px 15px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+    
+    .hero-content h2 {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
+    
+    .hero-stat-number {
+        font-size: 2rem;
+    }
+    
+    .hero-stat-label {
+        font-size: 0.9rem;
+    }
+    
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .filter-buttons {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .filter-btn {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+        text-align: center;
+    }
+    
+    .search-input {
+        padding: 12px 16px;
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    .search-btn {
+        padding: 12px 16px;
+        min-width: 50px;
+    }
+    
+    .map-container {
+        margin: 0 -15px;
+    }
+    
+    #map {
+        height: 250px;
+        border-radius: 0;
+    }
+    
+    .map-sidebar {
+        margin: 0;
+        border-radius: 0;
+        max-height: 150px;
+    }
+    
+    .map-store-item {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .store-card {
+        margin: 0 -5px;
+        border-radius: 8px;
+    }
+    
+    .store-content {
+        padding: 15px;
+    }
+    
+    .store-name {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+    
+    .store-rating {
+        font-size: 0.8rem;
+        margin-bottom: 12px;
+    }
+    
+    .store-badge {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+        top: 8px;
+        right: 8px;
+    }
+    
+    .store-distance {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+        top: 8px;
+        left: 8px;
+    }
+    
+    /* Modal Responsive */
+    .store-modal {
+        padding: 10px;
+    }
+    
+    .modal-content {
+        margin: 0;
+        border-radius: 8px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .modal-header {
+        padding: 20px 15px 15px;
+    }
+    
+    .modal-title {
+        font-size: 1.3rem;
+    }
+    
+    .modal-close {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+    }
+    
+    .modal-body {
+        padding: 0 15px 20px;
+    }
+    
+    .modal-image {
+        height: 200px;
+        margin: 0 -15px 20px;
+        border-radius: 0;
+    }
+    
+    .modal-info-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .modal-info-section h4 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+        margin: 0 -15px;
+        background: #f8f9fa;
+    }
+    
+    .modal-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Landscape Orientation on Mobile */
+@media (max-width: 767px) and (orientation: landscape) {
+    .locations-hero {
+        height: 70vh;
+        min-height: 300px;
+    }
+    
+    .hero-stats {
+        flex-direction: row;
+        gap: 40px;
+        justify-content: center;
+    }
+    
+    #map {
+        height: 200px;
+    }
+    
+    .map-sidebar {
+        max-height: 120px;
+    }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .store-image img {
+        image-rendering: -webkit-optimize-contrast;
+        
+    }
+    
+    .hero-background {
+        background-attachment: scroll; /* Fix for mobile */
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .filter-btn,
+    .store-btn,
+    .map-store-item {
+        min-height: 44px; /* iOS recommended touch target */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .search-input {
+        min-height: 44px;
+    }
+    
+    .store-card {
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(139, 69, 19, 0.1);
+    }
+    
+    .modal-close {
+        min-width: 44px;
+        min-height: 44px;
+    }
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .hero-background {
+        background-attachment: scroll;
+    }
+    
+    .store-card,
+    .store-btn,
+    .filter-btn {
+        transition: none;
+    }
+    
+    .modal-content {
+        transition: none;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .locations-hero,
+    .search-controls,
+    .map-container,
+    .cta-section,
+    .store-actions,
+    .modal-actions {
+        display: none !important;
+    }
+    
+    .stores-grid {
+        display: block !important;
+    }
+    
+    .store-card {
+        break-inside: avoid;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        box-shadow: none !important;
+    }
+    
+    .store-content {
+        padding: 15px;
+    }
+    
+    .store-name {
+        color: #000 !important;
+    }
+    
+    .store-info-item {
+        color: #333 !important;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+    }
+    
+    h1, h2, h3 {
+        color: #000 !important;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .map-sidebar {
+        background: #2a2a2a;
+        color: #fff;
+    }
+    
+    .map-store-item {
+        border-bottom: 1px solid #444;
+    }
+    
+    .map-store-item:hover,
+    .map-store-item.active {
+        background: rgba(139, 69, 19, 0.3);
+    }
+    
+    .modal-content {
+        background: #1a1a1a;
+        color: #fff;
+    }
+    
+    .modal-actions {
+        background: #2a2a2a;
+    }
+    
+    .store-card {
+        background: #2a2a2a;
+        color: #fff;
+    }
+    
+    .filter-btn {
+        background: #333;
+        color: #fff;
+        border: 1px solid #555;
+    }
+    
+    .filter-btn.active {
+        background: var(--primary-color);
+    }
+    
+    .search-input {
+        background: #333;
+        color: #fff;
+        border: 1px solid #555;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .store-card {
+        border: 2px solid #000;
+    }
+    
+    .filter-btn {
+        border: 2px solid #000;
+    }
+    
+    .filter-btn.active {
+        background: #000;
+        color: #fff;
+    }
+    
+    .store-btn {
+        border: 2px solid currentColor;
+    }
+    
+    .search-input {
+        border: 2px solid #000;
+    }
+    
+    .modal-content {
+        border: 3px solid #000;
+    }
+}
+
+/* Container Queries (Future-proofing) */
+@container (max-width: 400px) {
+    .store-actions {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .filter-buttons {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Flexible Grid System */
+.stores-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+@media (max-width: 640px) {
+    .stores-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 15px;
+    }
+}
+
+@media (max-width: 320px) {
+    .stores-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
+
+/* Utility Classes for Responsive */
+.hidden-mobile {
+    display: block;
+}
+
+.visible-mobile {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .hidden-mobile {
+        display: none !important;
+    }
+    
+    .visible-mobile {
+        display: block !important;
+    }
+}
+
+.text-center-mobile {
+    text-align: left;
+}
+
+@media (max-width: 767px) {
+    .text-center-mobile {
+        text-align: center !important;
+    }
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
