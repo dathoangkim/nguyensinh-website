@@ -158,10 +158,3 @@ npm start
 - Quản lý đơn hàng
 - Quản lý người dùng
 
-## Tác Giả
-
-[Tên Tác Giả] - [Email]
-
-## Giấy Phép
-
-Dự án này được cấp phép theo giấy phép [MIT](LICENSE).
